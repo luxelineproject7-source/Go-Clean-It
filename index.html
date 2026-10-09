@@ -23,8 +23,18 @@ body{background:radial-gradient(900px 500px at 85% -10%,#CFF1EC 0,transparent 60
 h1,h2,h3{font-family:var(--f-display);margin:0;text-wrap:balance;letter-spacing:-.01em}
 button{font:inherit;color:inherit;cursor:pointer}
 :focus-visible{outline:3px solid var(--accent);outline-offset:2px}
-.shell{max-width:1000px;margin-inline:auto;display:grid;grid-template-columns:minmax(0,1fr) 400px;gap:28px;align-items:start}
-@media (max-width:860px){.shell{grid-template-columns:minmax(0,1fr)}.panel{order:2}}
+.shell{max-width:440px;margin-inline:auto}
+.topbar{max-width:440px;margin:0 auto 12px;display:flex;align-items:center;gap:8px}
+.topbar b{font-family:var(--f-display);font-size:20px;flex:1;min-width:0;white-space:nowrap}
+.topbar label{display:none}
+.topbar select{flex:0 1 150px;min-width:0}
+.topbar select{width:auto;max-width:170px;padding:8px 10px;border-radius:10px;font-size:14px}
+.topbar .tool{min-height:40px}
+.scrim{position:fixed;inset:0;background:rgba(10,40,35,.45);z-index:19;display:none}
+body.open .scrim{display:block}
+.panel{position:fixed;top:0;right:0;bottom:0;width:min(440px,100%);z-index:20;background:var(--bg);overflow:auto;padding:18px 16px calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(105%);transition:transform .22s ease;box-shadow:-18px 0 40px -20px rgba(10,40,35,.5);visibility:hidden}
+body.open .panel{transform:none;visibility:visible}
+.panel .close{align-self:flex-end}
 /* demo panel */
 .panel{display:flex;flex-direction:column;gap:18px;min-width:0}
 .brand h1{font-size:28px}.brand p{margin:4px 0 0;color:var(--muted);max-width:44ch}
@@ -41,7 +51,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 .log pre{margin:0;white-space:pre-wrap;word-break:break-word}.log small{color:var(--muted)}
 /* phone */
 .phone{background:var(--surface);border:1px solid var(--line);border-radius:28px;overflow:hidden;display:flex;flex-direction:column;height:760px;max-height:calc(100dvh - 40px);min-height:560px;box-shadow:0 18px 50px -24px rgba(10,40,35,.35)}
-@media (max-width:860px){.phone{max-height:none;height:720px}}
+@media (max-width:520px){.phone{height:calc(100dvh - 92px);max-height:none;min-height:480px;border-radius:22px}}
 .appbar{padding:14px 18px 12px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px;min-height:60px}
 .appbar h2{font-size:19px;flex:1;min-width:0}
 .back{border:0;background:var(--surface2);border-radius:50%;width:36px;height:36px;font-size:18px}
@@ -135,6 +145,8 @@ textarea{min-height:84px;resize:vertical}
 </style>
 
 </head><body>
+<div class="topbar" id="topbar"></div>
+<div class="scrim" data-act="panel-close"></div>
 <div class="shell">
   <aside class="panel" id="panel"></aside>
   <main class="phone" id="phone" aria-live="polite"></main>
@@ -150,7 +162,8 @@ var ROOMS=[{id:'r1',name:'Toilet Lt.1 Pria',tok:'9f3a1c7e',floor:1},{id:'r5',nam
   {id:'r2',name:'Toilet Lt.2 Putri',tok:'4be72d90',floor:2},{id:'r3',name:'Ruang Kuliah A-201',tok:'c18d5f2a',floor:2},{id:'r7',name:'Area umum Lantai 2',tok:'b3190e55',floor:2,common:true},
   {id:'r4',name:'Lab Komputer 3',tok:'7a0e93bd',floor:3},{id:'r6',name:'Ruang Dosen A-305',tok:'2d9b8a41',floor:3},{id:'r8',name:'Area umum Lantai 3',tok:'61fc2a8d',floor:3,common:true}];
 var FLOORS=[{n:1,tok:'fl1x9a40'},{n:2,tok:'fl2k3c71'},{n:3,tok:'fl3m7d12'}];
-var QR_BASE='https://campusclean.example/r/';
+/* QR codes point to this deployed page, so scanning one with a phone opens that room for real. */
+var QR_BASE=(location.protocol.indexOf('http')===0?location.origin+location.pathname:'https://example.com/')+'?r=';
 function floorRooms(n){return ROOMS.filter(function(r){return r.floor===n;});}
 var BUILDING='Gedung A, Fakultas Teknik';
 function svg(d){return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+d+'</svg>';}
@@ -415,8 +428,11 @@ function render(){
   var pending=reports.filter(function(r){return r.assigned===null&&(r.status==='assigned'||r.status==='escalated');}).length;
   var roleBtns=Object.keys(USERS).map(function(k){return '<button class="chip" data-act="role" data-id="'+k+'" aria-pressed="'+(ui.user===k)+'">'+USERS[k].label+'</button>';}).join('');
   var log=logs.length?logs.slice(0,5).map(function(l,i){return '<div class="wa"><small>'+(l.mail?'Email ke ':'WhatsApp ke ')+esc(l.to)+' · '+when(l.at)+'</small><p>'+esc(l.text).replace(/\n/g,'<br>')+'</p><button class="tool" data-act="openlog" data-id="'+i+'">'+(l.key?'Buka tugas':'Buka status')+' (simulasi ketuk tautan)</button></div>';}).join(''):'<small>Belum ada pesan. Kirim laporan sebagai pelapor.</small>';
+  document.getElementById('topbar').innerHTML='<b>Go Clean It</b><label class="hint" for="rolesel" style="margin:0">Peran</label><select id="rolesel" aria-label="Masuk sebagai">'
+    +Object.keys(USERS).map(function(k){return '<option value="'+k+'"'+(ui.user===k?' selected':'')+'>'+USERS[k].label+'</option>';}).join('')
+    +'</select><button class="tool" data-act="panel-open">Alat uji</button>';
   document.getElementById('panel').innerHTML=
-    '<div class="brand"><h1>Go Clean It</h1><p>Prototipe klik untuk lapor dan menangani kebersihan ruangan kampus. Data hanya di halaman ini dan hilang saat dimuat ulang.</p></div>'
+    '<button class="tool close" data-act="panel-close">Tutup</button><div class="brand"><h1>Alat uji</h1><p>Prototipe klik untuk lapor dan menangani kebersihan ruangan kampus. Data hanya di halaman ini dan hilang saat dimuat ulang.</p></div>'
     +'<div><div class="label">Masuk sebagai</div><div class="roles">'+roleBtns+'</div></div>'
     +'<div><div class="label">Alat uji</div><div class="tools"><button class="tool" data-act="advance">Maju 10 menit ('+when(now())+')</button><button class="tool" data-act="race" '+(pending?'':'disabled')+'>Dedi dan Sari menerima bersamaan</button><button class="tool" data-act="reset">Mulai ulang</button></div></div>'
     +'<div><div class="label">Notifikasi email ke petugas jaga</div><div class="banner '+({off:'p-open',idle:'p-prog',ok:'p-done',fail:'p-esc'}[mailState])+'">'
@@ -440,7 +456,13 @@ var NAV={role:1,tab:1,back:1,'open-report':1,'open-task':1,'open-sup':1,scan:1,'
 var navToken=0;
 document.addEventListener('click',function(e){
   var t=e.target.closest('[data-act]');if(!t||ui.busy||ui.splash)return;
-  var a=t.dataset.act,id=t.dataset.id;
+  act(t.dataset.act,t.dataset.id);
+});
+document.addEventListener('change',function(e){
+  if(e.target.id==='rolesel'&&!ui.busy&&!ui.splash)act('role',e.target.value);
+});
+function act(a,id){
+  if(a==='role'&&document.body.classList.contains('open'))document.body.classList.remove('open');
   if(SLOW[a]&&!(a==='finish'&&!find(id).photos.after)){
     var extra=a==='reassign'&&document.getElementById('rs')?document.getElementById('rs').value:null;
     ui.busy={a:a,id:id};rerender();
@@ -451,9 +473,11 @@ document.addEventListener('click',function(e){
     setTimeout(function(){if(k===navToken){ui.loading=false;rerender();}},450);return;
   }
   apply(a,id);rerender();
-});
+}
 function apply(a,id,extra){
   var u=ui.user;
+  if(a==='panel-open'){document.body.classList.add('open');return;}
+  if(a==='panel-close'){document.body.classList.remove('open');return;}
   if(a==='role'){ui.user=id;ui.tab=0;ui.screen=null;ui.confirm=null;ui.stars=0;ui.comment='';}
   else if(a==='tab'){ui.tab=+id;ui.screen=null;}
   else if(a==='back'){var s=ui.screen;ui.screen=!s?null:s.type==='form'?{type:'room',room:s.room,from:s.from,floor:s.floor}:(s.type==='room'&&s.from==='floor')?{type:'floor',floor:s.floor}:null;ui.confirm=null;}
@@ -503,6 +527,14 @@ document.addEventListener('change',function(e){
     if(kind==='before')ui.draft.photo=url;else find(ui.screen.id).photos.after=url;rerender();};img.src=fr.result;};
   fr.readAsDataURL(e.target.files[0]);
 });
+/* Real QR link: ?r=<token> opens that room (or floor) straight away, like scanning a sticker. */
+try{
+  var qp=new URLSearchParams(location.search).get('r');
+  if(qp){
+    var qr=ROOMS.filter(function(r){return r.tok===qp;})[0],qf=FLOORS.filter(function(f){return f.tok===qp;})[0];
+    if(qr)ui.screen={type:'room',room:qr.id};else if(qf)ui.screen={type:'floor',floor:qf.n};
+  }
+}catch(e){}
 ui.splash=true;render();
 setTimeout(function(){ui.splash=false;render();},1700);
 })();

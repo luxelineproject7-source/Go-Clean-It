@@ -192,15 +192,28 @@ function placeholder(label,c){var svg='<svg xmlns="http://www.w3.org/2000/svg" w
 var DUTY_WA='6281234567890'; /* example number of the on-duty cleaning coordinator */
 function waLink(r){return 'https://wa.me/'+DUTY_WA+'?text='+encodeURIComponent('Halo, saya mau lapor kebersihan di '+(r?room(r.room).name:'ruangan ini')+' ('+BUILDING+').');}
 function notify(key,r,text){var u=USERS[key];logs.unshift({at:now(),key:key,to:u?u.name:key,rid:r.id,text:text+'\n'+room(r.room).name});if(logs.length>12)logs.pop();}
-/* Real email to the on-duty coordinator. Works only when deployed (needs /api/notify). Fails silently otherwise. */
-function emailNotify(r){
-  if(location.protocol.indexOf('http')!==0)return;
-  var event=r.status==='escalated'?'escalated':'new_report';
+/* Real email to the on-duty coordinator, sent from the browser through Web3Forms (no server, no secret).
+   The access key is public by design: it can only send mail to the address it was created for. */
+var MAIL_KEY='__WEB3FORMS_KEY__';
+var mailState=MAIL_KEY.indexOf('__')===0?'off':'idle'; /* off = no key yet, idle, ok, fail */
+function sendMail(subject,lines,done){
+  if(mailState==='off'||location.protocol.indexOf('http')!==0){if(done)done(false);return;}
   try{
-    fetch('/api/notify',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({event:event,room:room(r.room).name,building:BUILDING,category:CATS[r.cat][0],note:r.note||'',wa:r.wa||''})})
-    .then(function(res){if(!res.ok)return;logs.unshift({at:now(),key:null,mail:true,to:'petugas jaga',rid:r.id,text:(event==='escalated'?'Laporan diteruskan: ':'Laporan baru: ')+CATS[r.cat][0]+'\n'+room(r.room).name});render();})
-    .catch(function(){});
-  }catch(e){}
+    fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},
+      body:JSON.stringify({access_key:MAIL_KEY,subject:subject,from_name:'Go Clean It',message:lines.join('\n'),botcheck:''})})
+    .then(function(res){return res.json().catch(function(){return {};}).then(function(j){return res.ok&&j.success!==false;});})
+    .then(function(ok){mailState=ok?'ok':'fail';if(done)done(ok);render();})
+    .catch(function(){mailState='fail';if(done)done(false);render();});
+  }catch(e){mailState='fail';if(done)done(false);}
+}
+function emailNotify(r){
+  var esc2=r.status==='escalated',title=esc2?'Laporan diteruskan ke supervisor':'Laporan baru';
+  var lines=[title,'Ruangan: '+room(r.room).name,'Gedung: '+BUILDING,'Masalah: '+CATS[r.cat][0]];
+  if(r.note)lines.push('Catatan: '+r.note.slice(0,200));
+  if(r.wa)lines.push('WhatsApp pelapor: '+r.wa.slice(0,20));
+  sendMail('[Go Clean It] '+title+': '+room(r.room).name,lines,function(ok){
+    if(ok){logs.unshift({at:now(),key:null,mail:true,to:'petugas jaga',rid:r.id,text:title+': '+CATS[r.cat][0]+'\n'+room(r.room).name});}
+  });
 }
 function notifyGuest(r,text){if(r.wa)logs.unshift({at:now(),key:null,to:'Pelapor ('+r.wa+')',rid:r.id,text:text+'\n'+room(r.room).name});}
 function dispatch(r){
@@ -406,6 +419,9 @@ function render(){
     '<div class="brand"><h1>Go Clean It</h1><p>Prototipe klik untuk lapor dan menangani kebersihan ruangan kampus. Data hanya di halaman ini dan hilang saat dimuat ulang.</p></div>'
     +'<div><div class="label">Masuk sebagai</div><div class="roles">'+roleBtns+'</div></div>'
     +'<div><div class="label">Alat uji</div><div class="tools"><button class="tool" data-act="advance">Maju 10 menit ('+when(now())+')</button><button class="tool" data-act="race" '+(pending?'':'disabled')+'>Dedi dan Sari menerima bersamaan</button><button class="tool" data-act="reset">Mulai ulang</button></div></div>'
+    +'<div><div class="label">Notifikasi email ke petugas jaga</div><div class="banner '+({off:'p-open',idle:'p-prog',ok:'p-done',fail:'p-esc'}[mailState])+'">'
+    +({off:'<b>Belum aktif.</b> Kunci email belum dipasang di versi ini.',idle:'<b>Aktif.</b> Email dikirim saat ada laporan baru atau laporan diteruskan.',ok:'<b>Email terkirim.</b> Cek kotak masuk petugas jaga (cek juga folder spam).',fail:'<b>Email gagal terkirim.</b> Coba lagi dengan tombol uji, atau periksa kunci email.'}[mailState])
+    +'</div><div class="tools" style="margin-top:8px"><button class="tool" data-act="testmail" '+(mailState==='off'?'disabled':'')+'>Kirim email uji</button></div></div>'
     +'<div><div class="label">Coba urutan ini</div><ol class="steps"><li><b>Pelapor</b>: pilih pintu, pilih jenis masalah, kirim.</li><li><b>Petugas Dedi</b>: terima, mulai, lalu selesaikan dengan foto sesudah. Lalu buka sebagai Petugas Sari untuk melihat tugas yang sudah diambil.</li><li><b>Pelapor</b>: beri bintang.</li><li><b>Supervisor</b>: lihat median respons. Kirim laporan baru, tekan Maju 10 menit, lalu lihat eskalasi.</li></ol></div>'
     +'<div><div class="label">Pesan WhatsApp yang terkirim (simulasi)</div><div class="log">'+log+'</div></div>'
     +'<details class="how"><summary>Siapa yang perlu login? Bagaimana notifikasi bekerja?</summary>'
@@ -470,6 +486,7 @@ function apply(a,id,extra){
   else if(a==='advance'){offset+=10*MIN;var n=escalateStale();toast(n?n+' laporan diteruskan ke supervisor.':'Waktu maju 10 menit. Tidak ada laporan yang perlu diteruskan.');}
   else if(a==='race'){var q2=reports.filter(function(r){return r.assigned===null&&(r.status==='assigned'||r.status==='escalated');})[0];if(q2){var x=accept(q2.id,'dedi'),y=accept(q2.id,'sari');toast('Dedi: '+(x==='ok'?'berhasil':'sudah diambil')+'. Sari: '+(y==='ok'?'berhasil':'sudah diambil petugas lain')+'.');}}
   else if(a==='reset'){seed();ui={user:'rani',tab:0,screen:null,draft:{cat:null,note:'',photo:null},confirm:null,stars:0,comment:''};Object.keys(USERS).forEach(function(k){USERS[k].active=true;});toast('Data demo dikembalikan.');}
+  else if(a==='testmail'){sendMail('[Go Clean It] Email uji',['Ini email uji dari Go Clean It.','Waktu: '+when(now())],function(ok){toast(ok?'Email uji terkirim. Cek kotak masuk dan folder spam.':'Email uji gagal. Cek koneksi atau kunci email.');});}
   else if(a==='theme'){var root=document.documentElement;root.dataset.theme=root.dataset.theme==='dark'?'light':'dark';}
 }
 function find(id){return reports.filter(function(r){return r.id===id;})[0];}

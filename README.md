@@ -11,6 +11,15 @@ Scan a QR sticker on a room door (or a floor sticker), report a cleaning problem
 2. Project Name must be lowercase, for example `go-clean-it`. Leave everything else as it is (Framework "Other", no build command).
 3. Press Deploy.
 
+## Shared data (so every phone sees the same reports)
+Without this the app keeps data only in each browser. To share it, use a free Supabase project:
+1. supabase.com > New project.
+2. SQL Editor > New query > paste `supabase-setup.sql` > Run.
+3. Project Settings > API: copy the **Project URL** and the **anon public** key. Never use the `service_role` key.
+4. Replace `__SUPABASE_URL__` and `__SUPABASE_KEY__` near the top of the script in `index.html`, commit, push. Vercel redeploys.
+
+The page polls the database every 3 seconds. "Accept" is atomic in the database, so two cleaners pressing it together get exactly one winner. This open-table setup is for the prototype only. Do not enter real personal data. The production design is in `docs/BLUEPRINT.md`.
+
 ## Email notifications
 When a report is filed or escalated, the page sends an email to the on-duty coordinator through [Web3Forms](https://web3forms.com). It runs in the browser, so there is no server and no Vercel setting to touch.
 

@@ -192,9 +192,58 @@ var STATUS={reported:['Terkirim','p-open'],assigned:['Menunggu petugas','p-open'
 var OPEN=['reported','assigned','escalated','accepted','in_progress'];
 var reports=[],logs=[],seq=0;
 var ui;
+
+/* ---- Shared storage (Supabase). Without a URL and key the app runs in single-browser mode. ----
+   Prototype only: the table is open to anyone holding the public key. The real build uses the
+   secured design in docs/BLUEPRINT.md (RLS, SQL functions, no direct writes). */
+var SB={url:'__SUPABASE_URL__',key:'__SUPABASE_KEY__'};
+var shared=SB.url.indexOf('__')!==0&&location.protocol.indexOf('http')===0;
+var syncState=shared?'connecting':'local'; /* local | connecting | ok | fail */
+var DEVICE=(function(){try{var d=localStorage.getItem('gci_device');if(!d){d='d'+Math.random().toString(16).slice(2)+Date.now().toString(16);localStorage.setItem('gci_device',d);}return d;}catch(e){return 'dtmp'+Math.random().toString(16).slice(2);}})();
+var dirty={},localVer=0,inflight=0,lastSig='',seeded=false,muted=false;
+function sb(path,opt){
+  opt=opt||{};var h={apikey:SB.key,Authorization:'Bearer '+SB.key,'Content-Type':'application/json'};if(opt.prefer)h.Prefer=opt.prefer;
+  return fetch(SB.url+'/rest/v1/'+path,{method:opt.method||'GET',headers:h,body:opt.body?JSON.stringify(opt.body):undefined})
+    .then(function(r){if(!r.ok)return Promise.reject(r.status);return r.text().then(function(t){try{return t?JSON.parse(t):[];}catch(e){return [];}});});
+}
+function touchItem(kind,id,data){if(!shared||muted)return;dirty[kind+'|'+id]={kind:kind,id:id,data:data};localVer++;clearTimeout(touchItem.t);touchItem.t=setTimeout(flush,120);}
+function touch(r){touchItem('report',r.id,r);}
+function touchUsers(){var m={};Object.keys(USERS).forEach(function(k){m[k]=USERS[k].active;});touchItem('user','active',m);}
+function pushLog(o){o.id='l'+Date.now().toString(36)+Math.random().toString(16).slice(2,5);logs.unshift(o);if(logs.length>12)logs.pop();touchItem('log',o.id,o);}
+function pushAll(){reports.forEach(touch);logs.forEach(function(l){touchItem('log',l.id,l);});touchUsers();}
+function flush(){
+  var rows=Object.keys(dirty).map(function(k){return dirty[k];});if(!rows.length)return;dirty={};inflight++;
+  sb('items?on_conflict=kind,id',{method:'POST',prefer:'resolution=merge-duplicates,return=minimal',body:rows})
+    .then(function(){syncState='ok';}).catch(function(){syncState='fail';}).then(function(){inflight--;});
+}
+function hash(s){var h=5381;for(var i=0;i<s.length;i++){h=((h<<5)+h+s.charCodeAt(i))|0;}return h;}
+function poll(){
+  if(!shared||inflight||Object.keys(dirty).length||document.hidden)return;
+  var v=localVer;
+  sb('items?select=kind,id,data').then(function(rows){
+    if(v!==localVer||inflight||Object.keys(dirty).length)return;
+    syncState='ok';
+    var rs=[],ls=[],uo=null;
+    rows.forEach(function(x){if(x.kind==='report')rs.push(x.data);else if(x.kind==='log')ls.push(x.data);else if(x.kind==='user')uo=x.data;});
+    if(!seeded&&!rs.some(function(r){return r.id==='seed-a';})){seeded=true;var keep=rs;seed();reports=reports.concat(keep);pushAll();render();return;}
+    seeded=true;
+    var sig=hash(JSON.stringify(rows))+':'+rows.length;
+    if(sig===lastSig){return;}
+    var ae=document.activeElement;if(ae&&/^(TEXTAREA|INPUT|SELECT)$/.test(ae.tagName)&&ae.id!=='rolesel')return; /* do not interrupt typing */
+    lastSig=sig;
+    reports=rs.sort(function(a,b){return a.created-b.created;});
+    logs=ls.sort(function(a,b){return b.at-a.at;}).slice(0,12);
+    if(uo)Object.keys(uo).forEach(function(k){if(USERS[k])USERS[k].active=uo[k];});
+    if(!ui.splash&&!ui.busy&&!ui.loading)render();
+  }).catch(function(){syncState='fail';render();});
+}
+function resetShared(){
+  inflight++;seeded=true;
+  sb('items?kind=neq.__none__',{method:'DELETE',prefer:'return=minimal'}).catch(function(){}).then(function(){seed();pushAll();inflight--;lastSig='';render();});
+}
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 function room(id){return ROOMS.filter(function(r){return r.id===id;})[0];}
-function ev(r,s,by){r.status=s;r.events.push({s:s,at:now(),by:by||null});}
+function ev(r,s,by){r.status=s;r.events.push({s:s,at:now(),by:by||null});touch(r);}
 function when(ts){var d=new Date(ts+7*3600000);return String(d.getUTCHours()).padStart(2,'0')+'.'+String(d.getUTCMinutes()).padStart(2,'0')+' WIB';}
 function ago(ts){var m=Math.floor((now()-ts)/MIN);return m<1?'baru saja':m<60?m+' menit lalu':Math.floor(m/60)+' jam lalu';}
 function evAt(r,s){var e=r.events.filter(function(x){return x.s===s;})[0];return e?e.at:null;}
@@ -204,7 +253,7 @@ function placeholder(label,c){var svg='<svg xmlns="http://www.w3.org/2000/svg" w
 
 var DUTY_WA='6281234567890'; /* example number of the on-duty cleaning coordinator */
 function waLink(r){return 'https://wa.me/'+DUTY_WA+'?text='+encodeURIComponent('Halo, saya mau lapor kebersihan di '+(r?room(r.room).name:'ruangan ini')+' ('+BUILDING+').');}
-function notify(key,r,text){var u=USERS[key];logs.unshift({at:now(),key:key,to:u?u.name:key,rid:r.id,text:text+'\n'+room(r.room).name});if(logs.length>12)logs.pop();}
+function notify(key,r,text){var u=USERS[key];pushLog({at:now(),key:key,to:u?u.name:key,rid:r.id,text:text+'\n'+room(r.room).name});}
 /* Real email to the on-duty coordinator, sent from the browser through Web3Forms (no server, no secret).
    The access key is public by design: it can only send mail to the address it was created for. */
 var MAIL_KEY='__WEB3FORMS_KEY__';
@@ -225,20 +274,23 @@ function emailNotify(r){
   if(r.note)lines.push('Catatan: '+r.note.slice(0,200));
   if(r.wa)lines.push('WhatsApp pelapor: '+r.wa.slice(0,20));
   sendMail('[Go Clean It] '+title+': '+room(r.room).name,lines,function(ok){
-    if(ok){logs.unshift({at:now(),key:null,mail:true,to:'petugas jaga',rid:r.id,text:title+': '+CATS[r.cat][0]+'\n'+room(r.room).name});}
+    if(ok){pushLog({at:now(),key:null,mail:true,to:'petugas jaga',rid:r.id,text:title+': '+CATS[r.cat][0]+'\n'+room(r.room).name});}
   });
 }
-function notifyGuest(r,text){if(r.wa)logs.unshift({at:now(),key:null,to:'Pelapor ('+r.wa+')',rid:r.id,text:text+'\n'+room(r.room).name});}
+function notifyGuest(r,text){if(r.wa)pushLog({at:now(),key:null,to:'Pelapor ('+r.wa+')',rid:r.id,text:text+'\n'+room(r.room).name});}
 function dispatch(r){
   var staff=Object.keys(USERS).filter(onShift);
   if(staff.length){ev(r,'assigned');staff.forEach(function(u){notify(u,r,'Laporan baru: '+CATS[r.cat][0]);});}
   else{ev(r,'escalated');notify('wulan',r,'Tidak ada petugas bertugas: '+CATS[r.cat][0]);}
 }
-function mk(roomId,cat,note,by,ageMin,photo){var r={id:'rp'+(++seq)+Math.random().toString(16).slice(2,6),room:roomId,cat:cat,note:note,reporter:by,assigned:null,status:'reported',events:[],photos:{before:photo||null,after:null},rating:null,comment:'',created:now()-ageMin*MIN};r.events.push({s:'reported',at:r.created,by:by});reports.push(r);return r;}
+function mk(roomId,cat,note,by,ageMin,photo){var r={id:'rp'+(++seq)+Math.random().toString(16).slice(2,6),room:roomId,cat:cat,note:note,reporter:by,assigned:null,status:'reported',events:[],photos:{before:photo||null,after:null},rating:null,comment:'',created:now()-ageMin*MIN};r.events.push({s:'reported',at:r.created,by:by});reports.push(r);touch(r);return r;}
 function seed(){
+  muted=true;
   reports=[];logs=[];offset=0;
   var a=mk('r3','floor','Lantai bekas tumpahan kopi','other',95);a.events.push({s:'assigned',at:a.created+1000});a.events.push({s:'accepted',at:a.created+6*MIN,by:'dedi'});a.events.push({s:'in_progress',at:a.created+9*MIN,by:'dedi'});a.events.push({s:'done',at:a.created+22*MIN,by:'dedi'});a.status='done';a.assigned='dedi';a.photos.after=placeholder('Foto sesudah','#2E7D6B');
   var b=mk('r1','toilet','Sabun habis','other',200);b.events.push({s:'assigned',at:b.created+1000});b.events.push({s:'accepted',at:b.created+9*MIN,by:'sari'});b.events.push({s:'in_progress',at:b.created+12*MIN,by:'sari'});b.events.push({s:'done',at:b.created+30*MIN,by:'sari'});b.events.push({s:'closed',at:b.created+40*MIN,by:'other'});b.status='closed';b.assigned='sari';b.rating=4;
+  a.id='seed-a';b.id='seed-b'; /* fixed ids so two browsers seeding at once do not duplicate */
+  muted=false;
 }
 function stats(){
   var live=reports.filter(function(r){return r.status!=='cancelled';});
@@ -249,24 +301,33 @@ function stats(){
 
 /* --- database-style actions (the real build does these as SQL functions) --- */
 function createReport(roomId,cat,note,photo,wa){
-  var me=ui.user;
+  var me=DEVICE;
   var recent=reports.filter(function(r){return r.reporter===me&&now()-r.created<60*MIN;}).length;
   if(recent>=5)return {err:'Kamu sudah mengirim 5 laporan dalam 1 jam terakhir. Coba lagi nanti, atau hubungi supervisor kalau mendesak.'};
   var dup=reports.filter(function(r){return r.room===roomId&&r.cat===cat&&OPEN.indexOf(r.status)>-1&&now()-r.created<30*MIN;})[0];
   if(dup)return {dup:dup};
   var r=mk(roomId,cat,note,me,0,photo);r.wa=wa||'';dispatch(r);emailNotify(r);return {r:r};
 }
-function accept(id,u){
-  var r=reports.filter(function(x){return x.id===id;})[0];
-  if(!r||!onShift(u))return 'forbidden';
-  if(r.assigned===null&&(r.status==='assigned'||r.status==='escalated')){r.assigned=u;ev(r,'accepted',u);notifyGuest(r,'Laporanmu diterima petugas dan segera ditangani.');return 'ok';}
-  return 'taken';
+/* Atomic accept. In shared mode the database decides: the update only matches while assigned is still null. */
+function accept(id,u,cb){
+  var r=find(id);
+  if(!r||!onShift(u)){cb('forbidden');return;}
+  if(!(r.assigned===null&&(r.status==='assigned'||r.status==='escalated'))){cb('taken');return;}
+  if(!shared){r.assigned=u;ev(r,'accepted',u);notifyGuest(r,'Laporanmu diterima petugas dan segera ditangani.');cb('ok');return;}
+  var nr=JSON.parse(JSON.stringify(r));nr.assigned=u;nr.status='accepted';nr.events.push({s:'accepted',at:now(),by:u});
+  localVer++;
+  sb('items?kind=eq.report&id=eq.'+encodeURIComponent(id)+'&'+encodeURIComponent('data->>assigned')+'=is.null&'+encodeURIComponent('data->>status')+'=in.(assigned,escalated)',
+    {method:'PATCH',prefer:'return=representation',body:{data:nr}})
+  .then(function(rows){
+    if(rows&&rows.length){for(var i=0;i<reports.length;i++){if(reports[i].id===id)reports[i]=nr;}notifyGuest(nr,'Laporanmu diterima petugas dan segera ditangani.');cb('ok');}
+    else{lastSig='';cb('taken');}
+  }).catch(function(){cb('error');});
 }
 function escalateStale(){var n=0;reports.forEach(function(r){if(r.status==='assigned'&&now()-r.created>10*MIN){ev(r,'escalated');emailNotify(r);notify('wulan',r,'Belum ada yang menerima dalam 10 menit');n++;}});return n;}
 
 /* --- ui state --- */
 ui={user:'rani',tab:0,screen:null,draft:{cat:null,note:'',photo:null},confirm:null,stars:0,comment:''};
-seed();
+if(!shared)seed(); /* shared mode starts empty and loads from the database */
 
 /* --- views --- */
 function pill(s){return '<span class="pill '+STATUS[s][1]+'">'+STATUS[s][0]+'</span>';}
@@ -300,7 +361,7 @@ function reporterView(){
   if(ui.screen&&ui.screen.type==='room')return roomView();
   if(ui.screen&&ui.screen.type==='form')return formView();
   if(ui.screen&&ui.screen.type==='report')return reportView(ui.screen.id,false);
-  var mine=reports.filter(function(r){return r.reporter===ui.user;}).sort(function(a,b){return b.created-a.created;});
+  var mine=reports.filter(function(r){return r.reporter===DEVICE;}).sort(function(a,b){return b.created-a.created;});
   if(ui.tab===1)return {title:'Laporanku',body:mine.length?mine.map(function(r){return repCard(r,'open-report');}).join(''):'<div class="empty"><b>Belum ada laporan</b>Pindai QR di pintu ruangan untuk membuat laporan pertama.</div>',tabs:['Lapor','Laporanku']};
   var rooms=ROOMS.filter(function(r){return !r.common;}).map(function(r){return '<button class="card" data-act="scan" data-id="'+r.id+'"><span class="roomrow">'+ico('door')+'<span class="grow"><span class="room">'+esc(r.name)+'</span><br><span class="meta mono">/r/'+r.tok+'</span></span></span></button>';}).join('');
   var floors=FLOORS.map(function(f){return '<button class="card" data-act="scan-floor" data-id="'+f.n+'"><span class="roomrow">'+ico('qr')+'<span class="grow"><span class="room">Stiker Lantai '+f.n+'</span><br><span class="meta mono">/r/'+f.tok+'</span></span></span></button>';}).join('');
@@ -435,6 +496,8 @@ function render(){
     '<button class="tool close" data-act="panel-close">Tutup</button><div class="brand"><h1>Alat uji</h1><p>Prototipe klik untuk lapor dan menangani kebersihan ruangan kampus. Data hanya di halaman ini dan hilang saat dimuat ulang.</p></div>'
     +'<div><div class="label">Masuk sebagai</div><div class="roles">'+roleBtns+'</div></div>'
     +'<div><div class="label">Alat uji</div><div class="tools"><button class="tool" data-act="advance">Maju 10 menit ('+when(now())+')</button><button class="tool" data-act="race" '+(pending?'':'disabled')+'>Dedi dan Sari menerima bersamaan</button><button class="tool" data-act="reset">Mulai ulang</button></div></div>'
+    +'<div><div class="label">Data bersama</div><div class="banner '+({local:'p-open',connecting:'p-prog',ok:'p-done',fail:'p-esc'}[syncState])+'">'
+    +({local:'<b>Hanya di browser ini.</b> Laporan tidak terlihat di HP lain.',connecting:'<b>Menyambung…</b>',ok:'<b>Tersambung.</b> Laporan dibagi ke semua orang yang membuka halaman ini.',fail:'<b>Gagal tersambung ke database.</b> Coba muat ulang.'}[syncState])+'</div></div>'
     +'<div><div class="label">Notifikasi email ke petugas jaga</div><div class="banner '+({off:'p-open',idle:'p-prog',ok:'p-done',fail:'p-esc'}[mailState])+'">'
     +({off:'<b>Belum aktif.</b> Kunci email belum dipasang di versi ini.',idle:'<b>Aktif.</b> Email dikirim saat ada laporan baru atau laporan diteruskan.',ok:'<b>Email terkirim.</b> Cek kotak masuk petugas jaga (cek juga folder spam).',fail:'<b>Email gagal terkirim.</b> Coba lagi dengan tombol uji, atau periksa kunci email.'}[mailState])
     +'</div><div class="tools" style="margin-top:8px"><button class="tool" data-act="testmail" '+(mailState==='off'?'disabled':'')+'>Kirim email uji</button></div></div>'
@@ -501,15 +564,15 @@ function apply(a,id,extra){
   else if(a==='cancel-yes'){var r=find(id);ev(r,'cancelled',u);ui.confirm=null;toast('Laporan dibatalkan.');}
   else if(a==='star')ui.stars=+id;
   else if(a==='rate'){var rr=find(id);rr.rating=ui.stars;rr.comment=ui.comment;ev(rr,'closed',u);toast('Terima kasih atas penilaianmu.');}
-  else if(a==='accept'){var res2=accept(id,u);if(res2==='ok'){toast('Tugas diterima. Silakan menuju ruangan.');}else{toast('Sudah diambil petugas lain.');ui.screen=null;}}
+  else if(a==='accept'){accept(id,u,function(res2){if(res2==='ok'){toast('Tugas diterima. Silakan menuju ruangan.');}else if(res2==='error'){toast('Koneksi bermasalah. Coba lagi.');}else{toast('Sudah diambil petugas lain.');ui.screen=null;}rerender();});}
   else if(a==='start'){ev(find(id),'in_progress',u);toast('Status: sedang dikerjakan.');}
-  else if(a==='sample-after'){find(ui.screen.id).photos.after=placeholder('Foto sesudah','#2E7D6B');}
+  else if(a==='sample-after'){var sa=find(ui.screen.id);sa.photos.after=placeholder('Foto sesudah','#2E7D6B');touch(sa);}
   else if(a==='finish'){var f=find(id);if(!f.photos.after){toast('Tambahkan foto sesudah dulu.');}else{ev(f,'done',u);notifyGuest(f,'Selesai. Buka tautan untuk melihat foto dan memberi nilai.');toast('Tugas selesai. Pelapor bisa memberi nilai.');ui.screen=null;ui.tab=1;}}
   else if(a==='reassign'){if(extra){var q=find(id);q.assigned=extra;ev(q,'accepted',u);toast('Ditugaskan ke '+USERS[extra].name+'.');}}
-  else if(a==='toggle'){USERS[id].active=!USERS[id].active;toast(USERS[id].name+(USERS[id].active?' diaktifkan.':' dinonaktifkan. Akses langsung ditutup.'));}
-  else if(a==='advance'){offset+=10*MIN;var n=escalateStale();toast(n?n+' laporan diteruskan ke supervisor.':'Waktu maju 10 menit. Tidak ada laporan yang perlu diteruskan.');}
-  else if(a==='race'){var q2=reports.filter(function(r){return r.assigned===null&&(r.status==='assigned'||r.status==='escalated');})[0];if(q2){var x=accept(q2.id,'dedi'),y=accept(q2.id,'sari');toast('Dedi: '+(x==='ok'?'berhasil':'sudah diambil')+'. Sari: '+(y==='ok'?'berhasil':'sudah diambil petugas lain')+'.');}}
-  else if(a==='reset'){seed();ui={user:'rani',tab:0,screen:null,draft:{cat:null,note:'',photo:null},confirm:null,stars:0,comment:''};Object.keys(USERS).forEach(function(k){USERS[k].active=true;});toast('Data demo dikembalikan.');}
+  else if(a==='toggle'){USERS[id].active=!USERS[id].active;touchUsers();toast(USERS[id].name+(USERS[id].active?' diaktifkan.':' dinonaktifkan. Akses langsung ditutup.'));}
+  else if(a==='advance'){reports.forEach(function(r){if(OPEN.indexOf(r.status)>-1){r.created-=10*MIN;r.events.forEach(function(e){e.at-=10*MIN;});touch(r);}});var n=escalateStale();toast(n?n+' laporan diteruskan ke supervisor.':'Waktu maju 10 menit. Tidak ada laporan yang perlu diteruskan.');}
+  else if(a==='race'){var q2=reports.filter(function(r){return r.assigned===null&&(r.status==='assigned'||r.status==='escalated');})[0];if(q2){var rr2={};var fin=function(){if(rr2.d!==undefined&&rr2.s!==undefined){toast('Dedi: '+(rr2.d==='ok'?'berhasil':'sudah diambil')+'. Sari: '+(rr2.s==='ok'?'berhasil':'sudah diambil petugas lain')+'.');rerender();}};accept(q2.id,'dedi',function(x){rr2.d=x;fin();});accept(q2.id,'sari',function(y){rr2.s=y;fin();});}}
+  else if(a==='reset'){Object.keys(USERS).forEach(function(k){USERS[k].active=true;});ui={user:'rani',tab:0,screen:null,draft:{cat:null,note:'',photo:null},confirm:null,stars:0,comment:''};if(shared){resetShared();toast('Data demo untuk semua orang dikembalikan.');}else{seed();toast('Data demo dikembalikan.');}}
   else if(a==='testmail'){sendMail('[Go Clean It] Email uji',['Ini email uji dari Go Clean It.','Waktu: '+when(now())],function(ok){toast(ok?'Email uji terkirim. Cek kotak masuk dan folder spam.':'Email uji gagal. Cek koneksi atau kunci email.');});}
   else if(a==='theme'){var root=document.documentElement;root.dataset.theme=root.dataset.theme==='dark'?'light':'dark';}
 }
@@ -522,9 +585,9 @@ document.addEventListener('change',function(e){
   var kind=e.target.dataset&&e.target.dataset.file;if(!kind||!e.target.files[0])return;
   var fr=new FileReader();
   fr.onload=function(){var img=new Image();img.onload=function(){
-    var s=Math.min(1,640/Math.max(img.width,img.height)),c=document.createElement('canvas');c.width=img.width*s;c.height=img.height*s;
-    c.getContext('2d').drawImage(img,0,0,c.width,c.height);var url=c.toDataURL('image/jpeg',.8); /* re-encoding removes EXIF/GPS */
-    if(kind==='before')ui.draft.photo=url;else find(ui.screen.id).photos.after=url;rerender();};img.src=fr.result;};
+    var s=Math.min(1,560/Math.max(img.width,img.height)),c=document.createElement('canvas');c.width=img.width*s;c.height=img.height*s;
+    c.getContext('2d').drawImage(img,0,0,c.width,c.height);var url=c.toDataURL('image/jpeg',.65); /* re-encoding removes EXIF/GPS */
+    if(kind==='before')ui.draft.photo=url;else{var fa=find(ui.screen.id);fa.photos.after=url;touch(fa);}rerender();};img.src=fr.result;};
   fr.readAsDataURL(e.target.files[0]);
 });
 /* Real QR link: ?r=<token> opens that room (or floor) straight away, like scanning a sticker. */
@@ -536,6 +599,7 @@ try{
   }
 }catch(e){}
 ui.splash=true;render();
+if(shared){poll();setInterval(poll,3000);}
 setTimeout(function(){ui.splash=false;render();},1700);
 })();
 </script>

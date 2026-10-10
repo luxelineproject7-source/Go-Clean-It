@@ -196,7 +196,7 @@ var ui;
 /* ---- Shared storage (Supabase). Without a URL and key the app runs in single-browser mode. ----
    Prototype only: the table is open to anyone holding the public key. The real build uses the
    secured design in docs/BLUEPRINT.md (RLS, SQL functions, no direct writes). */
-var SB={url:'__SUPABASE_URL__',key:'__SUPABASE_KEY__'};
+var SB={url:'https://nzzljdirlovxwjjfsvwg.supabase.co',key:'sb_publishable_H4SeS0DPL10-ycivX4pX1Q_0p1GLOMO'};
 var shared=SB.url.indexOf('__')!==0&&location.protocol.indexOf('http')===0;
 var syncState=shared?'connecting':'local'; /* local | connecting | ok | fail */
 var DEVICE=(function(){try{var d=localStorage.getItem('gci_device');if(!d){d='d'+Math.random().toString(16).slice(2)+Date.now().toString(16);localStorage.setItem('gci_device',d);}return d;}catch(e){return 'dtmp'+Math.random().toString(16).slice(2);}})();

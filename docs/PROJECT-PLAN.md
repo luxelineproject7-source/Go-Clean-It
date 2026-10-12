@@ -4,6 +4,8 @@ Owner: Farid. Builder: Claude Code. Last updated: 12 Oct 2026.
 Live prototype: https://gocleanit.vercel.app · Repo: https://github.com/luxelineproject7-source/Go-Clean-It
 Full technical spec: [BLUEPRINT.md](BLUEPRINT.md) · Design decisions: [DESIGN-UPDATE.md](DESIGN-UPDATE.md)
 
+**The schedule baseline, budget, risk register and evaluation plan now live in [PROJECT-MANAGEMENT-PLAN.md](PROJECT-MANAGEMENT-PLAN.md). Where its dates differ from the dates below, the management plan wins. This file stays as the weekly tracker and health check.**
+
 How to use this file: update the tracker (section 1) and the weekly log (section 10) every week. A task is only marked Done when its proof exists. Dates after today are proposals, not promises.
 
 Status legend: **Done** (proof exists) · **Doing** · **Blocked** (waiting on a person) · **Todo** · **Later**

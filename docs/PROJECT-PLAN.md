@@ -1,6 +1,6 @@
 # Go Clean It: Project Plan
 
-Owner: Farid. Builder: Claude Code. Last updated: 12 Oct 2026.
+Project manager: Muhammad Farid Hasyim. Team: Rasyha Naufal (lead developer), Abdillah Ridho (developer), Rasyid (field, QR and testing lead). The developers build with Claude Code. Last updated: 15 Oct 2026.
 Live prototype: https://gocleanit.vercel.app · Repo: https://github.com/luxelineproject7-source/Go-Clean-It
 Full technical spec: [BLUEPRINT.md](BLUEPRINT.md) · Design decisions: [DESIGN-UPDATE.md](DESIGN-UPDATE.md)
 
@@ -50,13 +50,18 @@ Overall: Track A 6 of 7 phases done (about 85%), Track B 0%, Track C 0%.
 
 | Person or group | Role in project | Decides | Needed for |
 |---|---|---|---|
-| Farid | Owner | Scope, priorities, what ships | Everything |
+| Muhammad Farid Hasyim | Project manager and owner | Scope, priorities, what ships | Everything |
+| Rasyha Naufal | Lead developer (front end, deploys) | How screens and deploys are built | C-track |
+| Abdillah Ridho | Developer (back end, security, notifications) | How the database and security tests are built | C-track |
+| Rasyid | Field, QR and testing lead | Plate placement, test sessions, training | B1, B3, plates, pilot |
 | Lecturer (master user) | Sponsor and reviewer | Whether the idea is accepted, which building | B2, B5 |
 | Facility unit | Real users and data owner | Cleaners, shifts, coordinator number | B2, B3, C-track |
 | Cleaners | Daily users | Nothing, but must be able to use it | B1, pilot |
 | Supervisor (per faculty) | Escalation contact | Reassignments | B2, pilot |
 | Friends (testers) | Early feedback | Nothing | B1 |
-| Claude Code | Builder | How to implement within the blueprint rules | A, C |
+| Claude Code | Coding tool used by the developers | How to implement within the blueprint rules | A, C |
+
+Full role split, RACI matrix and workload per person: [PROJECT-MANAGEMENT-PLAN.md](PROJECT-MANAGEMENT-PLAN.md) sections 1.1 and 2.8.
 
 Rule from the blueprint: no silent changes to the ERD or security rules. Any change updates BLUEPRINT.md in the same commit.
 

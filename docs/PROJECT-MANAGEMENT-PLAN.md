@@ -1,11 +1,13 @@
 # Go Clean It: Project Management Plan
 
 Structured on the PMBOK process groups and knowledge areas used in the Manajemen Proyek course (EBI 4E3).
-Owner and project manager: Farid · Version 2.1, live deployment baseline with diagrams and charts (same numbers as 2.0) · Prepared 15 October 2026 · Replaces version 1.0 of 12 October 2026
+Project manager: Muhammad Farid Hasyim · Team: Rasyha Naufal, Abdillah Ridho, Rasyid · Version 2.2, live deployment baseline for a team of four · Prepared 15 October 2026 · Replaces version 1.0 of 12 October 2026
 
 Related files: [PROJECT-PLAN.md](PROJECT-PLAN.md) (weekly tracker and health check) · [BLUEPRINT.md](BLUEPRINT.md) (technical spec) · [DESIGN-UPDATE.md](DESIGN-UPDATE.md) · [index.html](../index.html) (clickable prototype)
 
 **What changed from version 1.0.** Version 1.0 planned a prototype test: free services, no labor cost, and QR stickers as one printing task. Version 2.0 plans the live system. It adds the .com domain, a production database with backups, WhatsApp onboarding, a privacy notice, a security review, physical QR plates for every room and floor, and a plan for who runs and pays for the system afterwards. The budget now includes labor, running costs and a 12-month cost of ownership, with real prices checked on 15 October 2026 (Appendix C).
+
+**What changed in version 2.2.** The project now has a team of four: Muhammad Farid Hasyim (project manager), Rasyha Naufal (lead developer), Abdillah Ridho (developer) and Rasyid (field, QR and testing lead). Every activity is assigned to named people (2.8.3), with a RACI matrix (2.8.5) and a weekly team meeting (WBS 1.3). The developers still build with Claude Code, but their time is now counted as in-kind labor, so the cost baseline rises from Rp 29.02 million to Rp 40.77 million. Cash is unchanged at Rp 14.24 million. Because the work is shared, nobody on the critical path is over capacity: the planned finish moves from Wed 2 Dec to Tue 1 Dec, and the committed date of Wed 2 Dec now has 1.00 working day of buffer. Version 2.1 added diagrams only.
 
 Unit used for effort: **work-days** (one person working one day). Money is in rupiah. Dollar prices are converted at **Rp 17,900 per US$** (Bank Indonesia JISDOR on 6 Oct 2026 was Rp 17,917). The baseline starts Monday 12 Oct 2026. Indonesian public holidays are not modelled.
 
@@ -21,7 +23,7 @@ Version 1.0 was checked against the slides in your Drive (Week 1 to 3, 5, 6, 7 a
 
 | ID | Finding in v1.0 | Reference | Fix in v2.0 | Section |
 |---|---|---|---|---|
-| A1 | Labor was valued at zero and the cash budget was close to Rp 0 | Week 5: most project cost is often labor; direct and indirect costs | Full cost: cash plus in-kind labor at stated rates, with builder cost shown separately | 2.6 |
+| A1 | Labor was valued at zero and the cash budget was close to Rp 0 | Week 5: most project cost is often labor; direct and indirect costs | Full cost: cash plus in-kind labor of the team of four and partners at stated rates | 2.6 |
 | A2 | Estimate type and accuracy not stated | Week 5: ROM −50% to +100%, budgetary −10% to +25%, definitive −5% to +10% | Every cost line has a type and a low, base and high value | 2.6 |
 | A3 | Estimating did not follow the 7 steps or use the full technique list | Week 5: 7 steps; expert judgment, analogous, parametric, bottom-up, three-point, reserve analysis, cost of quality, vendor bid analysis | Steps applied in order. Vendor quotes, parametric (price per message, per plate) and analogous (marketplace prices) added. Basis of estimate on each line | 2.6 |
 | A4 | No cost management plan content | Week 5: accuracy and units, procedure links, control thresholds, performance rules, report format, process description | Added as a table | 2.6 |
@@ -62,23 +64,35 @@ Version 1.0 was checked against the slides in your Drive (Week 1 to 3, 5, 6, 7 a
 | Item | Content |
 |---|---|
 | Project name | Go Clean It: live deployment of the campus room cleaning report and dispatch system |
-| Project manager | Farid, with authority over scope and schedule inside this charter |
+| Project manager | Muhammad Farid Hasyim, with authority over scope and schedule inside this charter |
+| Project team | Muhammad Farid Hasyim (project manager), Rasyha Naufal (lead developer, front end), Abdillah Ridho (developer, back end and security), Rasyid (field, QR and testing lead). The two developers build with Claude Code |
 | Sponsor | The lecturer (master user) |
 | Customer | The facility unit of the pilot building |
 | Project category | Problem and opportunity (Week 3 categories). Priority: high for the faculty pilot. Needed: by the end of the term |
 | Business case | When a room is dirty nobody knows who to tell, cleaners do not know where to go, and nobody can see how fast problems are fixed. A QR plate on every room and floor lets anyone report with no login. The right on-shift cleaner is notified, accepts, finishes with a photo, and the reporter rates it |
 | Statement of work (summary) | Deliver a secured web system on its own .com domain, notifications by WhatsApp, QR plates installed in one building (about 40 rooms, 4 floors), training for cleaners and supervisors, a 10-working-day pilot, and an evaluation report |
 | MOV (measurable organizational value) | Median time from report to accept under 15 minutes and at least 80% of reports accepted, compared with the Week 0 baseline. Cost per report is tracked (planned about Rp 2,300 in the recommended scenario, section 2.6) |
-| Objectives (SMART) | 1) By 10 Nov 2026 the secured system is live on the project's own .com and passes all 22 security tests. 2) By 13 Nov every QR plate is installed and scan-tested. 3) A 10-working-day pilot runs from 16 to 30 Nov. 4) By 2 Dec the evaluation report compares pilot and Week 0 numbers |
-| Summary milestones | Charter approved 13 Oct · Friends test done 16 Oct · Decisions done 21 Oct · Domain live 28 Oct · Security core green 28 Oct · Production environment 3 Nov · WhatsApp verified 2 Nov · Deployed 10 Nov · Security review done 13 Nov · Plates installed 13 Nov · Dry run done 16 Nov · Pilot 16 Nov to 30 Nov · Evaluation report 2 Dec |
-| Summary budget | Cash to the end of the pilot Rp 14.24 million (range Rp 9.51 million to Rp 23.89 million). In-kind labor Rp 14.78 million. Baseline (BAC) Rp 29.02 million. Contingency Rp 2.14 million and management reserve Rp 1.56 million bring the authorized budget to Rp 32.71 million. Running cost after the pilot: Rp 1.39 million to Rp 3.38 million per month, recommended Rp 2.10 million (section 2.6) |
+| Objectives (SMART) | 1) By 10 Nov 2026 the secured system is live on the project's own .com and passes all 22 security tests. 2) By 12 Nov every QR plate is installed and scan-tested. 3) A 10-working-day pilot runs from 16 Nov to 27 Nov. 4) By 2 Dec the evaluation report compares pilot and Week 0 numbers |
+| Summary milestones | Charter approved 13 Oct · Friends test done 16 Oct · Decisions done 21 Oct · Domain live 23 Oct · Security core green 28 Oct · Production environment 30 Oct · WhatsApp verified 2 Nov · Deployed 10 Nov · Security review done 12 Nov · Plates installed 12 Nov · Dry run done 13 Nov · Pilot 16 Nov to 27 Nov · Evaluation report 1 Dec |
+| Summary budget | Cash to the end of the pilot Rp 14.24 million (range Rp 9.51 million to Rp 23.89 million). In-kind labor Rp 26.53 million. Baseline (BAC) Rp 40.77 million. Contingency Rp 2.14 million and management reserve Rp 1.56 million bring the authorized budget to Rp 44.46 million. Running cost after the pilot: Rp 1.39 million to Rp 3.38 million per month, recommended Rp 2.10 million (section 2.6) |
 | Go/no-go criteria (Week 3: need, funding, commitment) | Need: reported problem and sponsor request. Funding: the faculty approves the year-1 running cost (Rp 25.22 million recommended scenario) before the pilot (decision D14). Commitment: the facility unit names a coordinator, installs the plates and answers the contact number |
 | Agreements | Letter or message from the facility unit confirming staff time, building access and the contact number. Vendor terms of service (Vercel, Supabase, Meta, registrar). A data processing note with the university (decision D5) |
 | Enterprise environmental factors | Personal data law (UU PDP). Campus Wi-Fi coverage. WhatsApp business policies and rate cards that change quarterly. Vendor terms (Vercel Hobby plan is for personal, non-commercial use). Exchange rate |
 | Organizational process assets | Blueprint with 11 tables and 22 security tests. Clickable prototype and its lessons. Version 1.0 plan. University procurement and legal rules (to be obtained) |
-| Assumptions | One building of about 40 rooms on 4 floors. Up to 50 reports a day. 9 cleaners and 2 supervisors. Cleaners own a phone with WhatsApp. One builder works on the project. Farid is available full time on weekdays (capacity 1.0) |
+| Assumptions | One building of about 40 rooms on 4 floors. Up to 50 reports a day. 9 cleaners and 2 supervisors. Cleaners own a phone with WhatsApp. A team of four works on the project, each member full time on weekdays (capacity 1.0, to be confirmed in decision D18). The two developers build with Claude Code |
 | High-level risks | Cleaners do not use the app. WhatsApp verification is slow. Nobody answers the contact number. Domain or database lost. QR plates damaged or misplaced. The system has no owner after the pilot |
-| Approval | Sponsor signature or written yes (date: ____). Facility unit (date: ____). Project manager (date: ____) |
+| Approval | Sponsor signature or written yes (date: ____). Facility unit (date: ____). Project manager (date: ____). Team members Rasyha Naufal, Abdillah Ridho and Rasyid (date: ____) |
+
+**Project team (four people).** Planned work-days include the weekly team meeting.
+
+| Name | Role | Leads (WBS packages) | Accountable for | Planned work-days |
+|---|---|---|---|---|
+| Muhammad Farid Hasyim | Project manager and product owner | 1.1 Charter and plan, 1.2 Evaluation report, 1.3 Team coordination, 4.1 Domain, 6.1 Production accounts and backups, 6.2 WhatsApp verification, 7.1 Privacy notice, 8.2 Handover | Scope, schedule, budget, stakeholders, change control (chair), weekly status | 10.76 |
+| Rasyha Naufal | Lead developer (front end) | 3.1 and 3.3 Test fixes, 4.2 Scaffold, 5.1 Reporter flow, 5.3 Supervisor and admin, 7.3 Hardening and deploy | Screens, deployments, DNS records, review of back-end code | 13.66 |
+| Abdillah Ridho | Developer (back end and security) | 4.3 Schema, 4.4 Security core and tests, 5.2 Cleaner flow, 6.3 Notifications, 7.4 Security review | Database, security tests S1 to S22, notifications, review of front-end code, on call in the pilot | 15.29 |
+| Rasyid | Field, QR and testing lead | 3.2 Friends test, 3.5 Site survey, 3.6 Week 0 baseline, 7.2 QR plate production, 7.5 Installation and scan test, 7.6 Training and dry run, 8.1 Pilot field support | Plates and the plate register, user tests, training, pilot data, contact for cleaners and supervisors | 13.80 |
+
+Roles are a proposal. Swapping people between roles changes only the names. Moving work between people can change the leveled schedule (what-if table in 2.8.4).
 
 **Constraint priority (Week 1: six constraints).** Changing one constraint moves at least one other.
 
@@ -88,7 +102,7 @@ Version 1.0 was checked against the slides in your Drive (Week 1 to 3, 5, 6, 7 a
 | Scope | Flexible | Cut optional features first: browser push, second language, extra dashboard charts. The plate print file generator is not optional |
 | Time | Flexible up to the reserve | The committed finish may slip inside the management reserve. Beyond it, the sponsor decides |
 | Cost | Capped | The authorized budget is the cap. Contingency needs the project manager. Management reserve needs the sponsor |
-| Resources | Fixed | One builder, one project manager, facility staff as agreed. Over-allocation is resolved by leveling, not overtime |
+| Resources | Fixed | Four team members (project manager, two developers, field lead) and facility staff as agreed. Over-allocation is resolved by leveling, not overtime |
 | Risk | Accepted within appetite | Risks with score 12 or more need a named owner and a response |
 
 **Milestones at a glance.**
@@ -99,7 +113,8 @@ Version 1.0 was checked against the slides in your Drive (Week 1 to 3, 5, 6, 7 a
 
 | Stakeholder | Interest in project | Power | Interest | Engagement strategy |
 |---|---|---|---|---|
-| Farid (project manager) | Delivery and learning | High | High | Manage closely |
+| Muhammad Farid Hasyim (project manager) | Delivery and learning | High | High | Manage closely |
+| Project team: Rasyha Naufal, Abdillah Ridho, Rasyid | Clear tasks, fair workload, learning, grade | High | High | Manage closely. Weekly team meeting, one owner per package (2.8.5) |
 | Lecturer (sponsor) | Idea proven and defensible | High | High | Manage closely. Demo in week 2, evaluation report on 2 Dec |
 | Facility unit | Faster, visible cleaning | High | High | Manage closely. Owns decisions D1, D4, D6, D9, D10 and the plate installation |
 | Faculty (budget holder) | Year-1 running cost | High | Medium | Keep satisfied. One-page cost summary before the pilot |
@@ -120,11 +135,11 @@ Version 1.0 was checked against the slides in your Drive (Week 1 to 3, 5, 6, 7 a
 | Element (Week 3) | Content |
 |---|---|
 | Introduction | Live deployment of Go Clean It in one building, with a 10-working-day pilot and a handover to operations |
-| How the project is organized | Sponsor (lecturer) approves scope and budget. Project manager (Farid) runs the plan and accepts work. The builder (Claude Code, directed by Farid) builds and tests. The facility unit supplies staff, data and installs the plates. University IT and legal review security and privacy. Change control board in 2.13 |
+| How the project is organized | Sponsor (lecturer) approves scope and budget. Project manager (Muhammad Farid Hasyim) runs the plan and accepts work. Rasyha Naufal and Abdillah Ridho build and test the system with Claude Code. Rasyid leads the site survey, QR plates, user tests and training. The facility unit supplies staff, data and installs the plates. University IT and legal review security and privacy. Change control board in 2.13 |
 | Management processes | This plan: scope, schedule, cost, quality, resource, communication, risk, procurement, stakeholder and change management, with a weekly review every Friday |
 | Technical processes | Phased build. Security before screens. Migrations are append-only. One commit per phase. Bilingual summary at the end of each phase. Separate development and production environments |
-| Work to be done | WBS in 2.4 (71.91 work-days of effort) |
-| Schedule | Baseline in 2.5. Committed finish Wed 2 Dec 2026 |
+| Work to be done | WBS in 2.4 (76.36 work-days of effort) |
+| Schedule | Baseline in 2.5. Planned finish Tue 1 Dec 2026. Committed finish Wed 2 Dec 2026 |
 | Budget | Cost baseline in 2.6 |
 | Subsidiary plans | 2.1 scope, 2.5 schedule, 2.6 cost, 2.7 quality, 2.8 resource, 2.9 communication, 2.10 risk, 2.11 procurement, 2.12 stakeholder, 2.13 change, 2.14 QR deployment |
 
@@ -179,7 +194,7 @@ Check in both directions: every requirement has a work package, and every packag
 |---|---|
 | First state (current situation) | Cleaning problems are reported by phone, chat or word of mouth. Nobody owns a request, cleaners guess the room, nobody measures response time, and there is no record or proof of work |
 | Business goals and priorities (input) | Median report-to-accept time under 15 minutes. At least 80% accepted. Visible response times for the faculty. Proof of work |
-| Constraints (input) | Slow campus Wi-Fi and basic Android phones. UI in Bahasa Indonesia. Personal data law (UU PDP). Approved budget. One builder. Security before screens |
+| Constraints (input) | Slow campus Wi-Fi and basic Android phones. UI in Bahasa Indonesia. Personal data law (UU PDP). Approved budget. Team of four. Security before screens |
 | Processes and organization (input) | Facility unit, supervisors, on-shift cleaners and reporters. QR scan, dispatch to on-shift cleaners, accept, work, photo proof, rating, escalation after 10 minutes |
 | Next state (goals for change) | Every report reaches an on-shift cleaner within minutes, has one owner and a status, is backed by a photo, and is measured. Every room and floor has a working QR plate |
 | Prioritized improvements | 1) Report by QR with no login (REQ-01, 02, 15, 20). 2) One owner per report: atomic accept and proof photo (REQ-04, 05). 3) Notification and escalation (REQ-07, 08). 4) Visibility: supervisor dashboard (REQ-09). 5) Control and keep it running: security, backups, support (REQ-11, 17, 18, 21) |
@@ -201,17 +216,18 @@ Check in both directions: every requirement has a work package, and every packag
 
 ### 2.4 Work breakdown structure (WBS)
 
-Levels follow the class scheme: 0 Project, 1 Category, 2 Sub-category, 3 Work package. Effort is in work-days (it can be larger than the duration of an activity when several people work in parallel). Package 2.0 (clickable prototype) is finished before the baseline date and is a sunk cost. It is not counted in the budget.
+Levels follow the class scheme: 0 Project, 1 Category, 2 Sub-category, 3 Work package. Effort is in work-days (it can be larger than the duration of an activity when several people work in parallel). Package 2.0 (clickable prototype) is finished before the baseline date and is a sunk cost. It is not counted in the budget. Package 1.3 (weekly team meeting) is level-of-effort work: it has effort and cost but is not an activity in the network.
 
 ![WBS in the class style: level bands 0 to 3|w=920](wbs-bands.png)
 
 Text version of the same WBS:
 
 ```
-0      Go Clean It live deployment                                  71.91
-├─ 1.0   Project management                                          3.08
-│  ├─ 1.1   Charter, plan, baseline approved                         1.08
-│  └─ 1.2   Evaluation and closing report                            2.00
+0      Go Clean It live deployment                                  76.36
+├─ 1.0   Project management                                          7.53
+│  ├─ 1.1   Charter, plan, baseline approved                         1.83
+│  ├─ 1.2   Evaluation and closing report                            2.00
+│  └─ 1.3   Team coordination (weekly meeting)                       3.70
 ├─ 2.0   Clickable prototype (complete, outside baseline)            0.00
 ├─ 3.0   Pilot readiness                                            17.16
 │  ├─ 3.1   Cross-device test and email fix                          1.25
@@ -253,7 +269,7 @@ Text version of the same WBS:
 
 | Parent | Children | Sum | Parent value | Result |
 |---|---|---|---|---|
-| 1.0 | 1.08 + 2.00 | 3.08 | 3.08 | OK |
+| 1.0 | 1.83 + 2.00 + 3.70 | 7.53 | 7.53 | OK |
 | 3.0 | 1.25 + 2.00 + 1.33 + 2.33 + 5.08 + 5.17 | 17.16 | 17.16 | OK |
 | 4.0 | 1.08 + 1.08 + 1.58 + 4.17 | 7.91 | 7.91 | OK |
 | 4.4 | 1.00 + 1.50 + 0.50 + 1.17 | 4.17 | 4.17 | OK |
@@ -261,7 +277,7 @@ Text version of the same WBS:
 | 6.0 | 1.67 + 1.00 + 3.83 | 6.50 | 6.50 | OK |
 | 7.0 | 2.70 + 1.00 + 2.08 + 2.17 + 4.00 + 2.80 | 14.75 | 14.75 | OK |
 | 8.0 | 12.00 + 1.67 | 13.67 | 13.67 | OK |
-| Project | sum of all categories | 71.91 | 71.91 | OK |
+| Project | sum of all categories | 76.36 | 76.36 | OK |
 
 **Note on deliverable orientation.** The class slides ask for a WBS built around deliverables, not around activities or departments. Most level 1 categories are deliverables (core system, applications, production and notifications, go-live package). Two are phases (3.0 Pilot readiness and 8.0 Pilot and handover). They are kept because the facility unit and the lecturer manage them as separate stages. If a pure deliverable view is required, 3.0 splits into test report, decision list, site survey and baseline dataset, and 8.0 into pilot dataset, runbook and evaluation report.
 
@@ -269,7 +285,7 @@ Text version of the same WBS:
 
 | Field | 4.1 Domain .com, DNS | 6.1 Production environment | 7.2 QR plate production |
 |---|---|---|---|
-| Responsible | Farid (account owner decision D13) | Builder, accepted by Farid | Farid, accepted by facility unit |
+| Responsible | Farid buys the domain (account owner decision D13). Rasyha sets the DNS records | Farid sets up accounts, billing and backups. Rasyid runs the restore drill. Accepted by Abdillah | Rasyid, accepted by facility unit |
 | Description | Buy the .com, set DNS to Vercel, email records (SPF, DKIM, DMARC), HTTPS, registrar 2-factor login, auto-renew | Supabase Pro project for production, separate from development. Secrets, migrations, daily backups, weekly export, restore drill | Design plates, generate tokens in the production database, get 3 quotes, print samples, order, inspect delivery |
 | Deliverable | Live domain with valid certificate. Registrar account with two admins | Production database and web app. Restore drill report | Plates delivered and counted. Print files archived |
 | Acceptance | REQ-16 met. Domain renews automatically for at least 1 year | REQ-17 met. Service role key only on the server | Sample plates pass the scan test on 3 phone models. 100% of plates counted and checked against the register |
@@ -283,34 +299,34 @@ Text version of the same WBS:
 
 | ID | Activity | WBS | Predecessors (type) | o | m | p | te | σ | Effort | Effort by role |
 |---|---|---|---|---|---|---|---|---|---|---|
-| A | Charter, plan and baseline approved | 1.1 | none | 0.5 | 1 | 2 | 1.08 | 0.25 | 1.08 | PM 1.08 |
-| B | Cross-device test and email fix | 3.1 | A (M) | 0.5 | 1 | 3 | 1.25 | 0.42 | 1.25 | PM 0.60, DEV 0.65 |
-| C | Friends test (5 testers) | 3.2 | B (M) | 1 | 2 | 3 | 2.00 | 0.33 | 2.00 | PM 1.50, TST 0.50 |
-| D | Fix test findings | 3.3 | C (M) | 1 | 1 | 3 | 1.33 | 0.33 | 1.33 | DEV 1.00, PM 0.33 |
-| E | Lecturer demo and decisions (provider, domain, building, funding) | 3.4 | D (D), people available (E) | 1 | 2 | 5 | 2.33 | 0.67 | 2.33 | PM 1.00, LEC 0.50, FAC 0.83 |
-| F | Site survey: room and floor list, QR placement plan | 3.5 | A (M), facility staff (E) | 1.5 | 3 | 5 | 3.08 | 0.58 | 5.08 | FAC 4.00, PM 1.08 |
-| G | Week 0 baseline measurement. Observation by the facility unit | 3.6 | A (M), facility staff (E) | 5 | 5 | 6 | 5.17 | 0.17 | 5.17 | FAC 4.00, PM 1.17 |
-| H | Domain .com bought, DNS and email records set | 4.1 | E (M) | 0.5 | 1 | 2 | 1.08 | 0.25 | 1.08 | PM 0.50, DEV 0.58 |
-| I | Scaffold | 4.2 | D (D) | 0.5 | 1 | 2 | 1.08 | 0.25 | 1.08 | DEV 0.80, PM 0.28 |
-| J | Schema and seed | 4.3 | I (M) | 1 | 1.5 | 2.5 | 1.58 | 0.25 | 1.58 | DEV 1.20, PM 0.38 |
-| K | Security core and tests | 4.4 | J (M) | 3 | 4 | 6 | 4.17 | 0.50 | 4.17 | DEV 3.20, PM 0.97 |
-| L | Reporter flow (guest) | 5.1 | K (M) | 2 | 3 | 5 | 3.17 | 0.50 | 3.17 | DEV 2.40, PM 0.77 |
-| M | Cleaner flow | 5.2 | K (M) | 2 | 2.5 | 4 | 2.67 | 0.33 | 2.67 | DEV 2.00, PM 0.67 |
-| N | Supervisor and admin (with QR sheet generator) | 5.3 | L, M (M) | 2 | 3 | 4 | 3.00 | 0.33 | 3.00 | DEV 2.30, PM 0.70 |
-| O | Production environment and backups | 6.1 | K, H (M) | 1 | 1.5 | 3 | 1.67 | 0.33 | 1.67 | DEV 1.20, PM 0.47 |
-| P | WhatsApp account verification and templates (external wait) | 6.2 | E (M), Meta review (E) | 3 | 7 | 15 | 7.67 | 2.00 | 1.00 | PM 0.50, LEG 0.50 |
-| Q | Notifications and escalation | 6.3 | L, M (M), P (E) | 3 | 3.5 | 6 | 3.83 | 0.50 | 3.83 | DEV 2.90, PM 0.93 |
-| R | Privacy notice, retention and legal review | 7.1 | E (M), university legal (E) | 2 | 3 | 6 | 3.33 | 0.67 | 2.70 | PM 1.20, LEG 1.00, DEV 0.50 |
-| S | QR plate production (design, quotes, print, delivery) | 7.2 | O, F, H (M), printer (E) | 4 | 6 | 10 | 6.33 | 1.00 | 1.00 | PM 0.80, FAC 0.20 |
-| T | Hardening and deploy to production | 7.3 | Q, N, O (M) | 1.5 | 2 | 3 | 2.08 | 0.25 | 2.08 | DEV 1.50, PM 0.58 |
-| U | Security review before go-live | 7.4 | T (M) | 1 | 2 | 4 | 2.17 | 0.50 | 2.17 | PM 0.70, DEV 0.90, LEG 0.57 |
-| V | QR plate installation and scan test | 7.5 | S, T (M) | 1 | 1.5 | 3 | 1.67 | 0.33 | 4.00 | FAC 3.00, PM 1.00 |
-| W | Training and dry run | 7.6 | U, V, R, G (M) | 1 | 1 | 2 | 1.17 | 0.17 | 2.80 | PM 0.50, FAC 0.50, CLN 1.50, SUP 0.30 |
-| X | Handover and operations plan | 8.2 | W (M) | 1 | 1.5 | 3 | 1.67 | 0.33 | 1.67 | PM 1.00, DEV 0.50, FAC 0.17 |
-| Y | Pilot operation (10 working days) | 8.1 | W (M) | 10 | 10 | 10 | 10.00 | 0.00 | 12.00 | PM 4.00, DEV 3.00, FAC 3.00, SUP 2.00 |
-| Z | Evaluation and closing report | 1.2 | Y, X (M) | 1 | 2 | 3 | 2.00 | 0.33 | 2.00 | PM 1.40, DEV 0.30, LEC 0.30 |
+| A | Charter, plan and baseline approved (with team kickoff) | 1.1 | none | 0.5 | 1 | 2 | 1.08 | 0.25 | 1.83 | FH 1.08, RN 0.25, AR 0.25, RS 0.25 |
+| B | Cross-device test and email fix | 3.1 | A (M) | 0.5 | 1 | 3 | 1.25 | 0.42 | 1.25 | RS 0.60, RN 0.65 |
+| C | Friends test (5 testers) | 3.2 | B (M) | 1 | 2 | 3 | 2.00 | 0.33 | 2.00 | RS 1.00, FH 0.50, TST 0.50 |
+| D | Fix test findings | 3.3 | C (M) | 1 | 1 | 3 | 1.33 | 0.33 | 1.33 | RN 0.60, AR 0.40, RS 0.33 |
+| E | Lecturer demo and decisions (provider, domain, building, funding) | 3.4 | D (D), people available (E) | 1 | 2 | 5 | 2.33 | 0.67 | 2.33 | FH 0.75, RN 0.25, LEC 0.50, FAC 0.83 |
+| F | Site survey: room and floor list, QR placement plan | 3.5 | A (M), facility staff (E) | 1.5 | 3 | 5 | 3.08 | 0.58 | 5.08 | FAC 4.00, RS 1.08 |
+| G | Week 0 baseline measurement. Observation by the facility unit | 3.6 | A (M), facility staff (E) | 5 | 5 | 6 | 5.17 | 0.17 | 5.17 | FAC 4.00, RS 1.17 |
+| H | Domain .com bought, DNS and email records set | 4.1 | E (M) | 0.5 | 1 | 2 | 1.08 | 0.25 | 1.08 | FH 0.50, RN 0.58 |
+| I | Scaffold | 4.2 | D (D) | 0.5 | 1 | 2 | 1.08 | 0.25 | 1.08 | RN 0.80, AR 0.28 |
+| J | Schema and seed | 4.3 | I (M) | 1 | 1.5 | 2.5 | 1.58 | 0.25 | 1.58 | AR 1.20, RN 0.38 |
+| K | Security core and tests | 4.4 | J (M) | 3 | 4 | 6 | 4.17 | 0.50 | 4.17 | AR 3.20, RN 0.97 |
+| L | Reporter flow (guest) | 5.1 | K (M) | 2 | 3 | 5 | 3.17 | 0.50 | 3.17 | RN 2.40, RS 0.77 |
+| M | Cleaner flow | 5.2 | K (M) | 2 | 2.5 | 4 | 2.67 | 0.33 | 2.67 | AR 2.00, RS 0.67 |
+| N | Supervisor and admin (with QR sheet generator) | 5.3 | L, M (M) | 2 | 3 | 4 | 3.00 | 0.33 | 3.00 | RN 2.30, FH 0.70 |
+| O | Production environment and backups | 6.1 | K, H (M) | 1 | 1.5 | 3 | 1.67 | 0.33 | 1.67 | FH 1.20, RS 0.47 |
+| P | WhatsApp account verification and templates (external wait) | 6.2 | E (M), Meta review (E) | 3 | 7 | 15 | 7.67 | 2.00 | 1.00 | FH 0.50, LEG 0.50 |
+| Q | Notifications and escalation | 6.3 | L, M (M), P (E) | 3 | 3.5 | 6 | 3.83 | 0.50 | 3.83 | AR 2.90, RS 0.93 |
+| R | Privacy notice, retention and legal review | 7.1 | E (M), university legal (E) | 2 | 3 | 6 | 3.33 | 0.67 | 2.70 | FH 1.20, LEG 1.00, AR 0.50 |
+| S | QR plate production (design, quotes, print, delivery) | 7.2 | O, F, H (M), printer (E) | 4 | 6 | 10 | 6.33 | 1.00 | 1.00 | RS 0.80, FAC 0.20 |
+| T | Hardening and deploy to production | 7.3 | Q, N, O (M) | 1.5 | 2 | 3 | 2.08 | 0.25 | 2.08 | RN 1.50, AR 0.58 |
+| U | Security review before go-live | 7.4 | T (M) | 1 | 2 | 4 | 2.17 | 0.50 | 2.17 | AR 0.90, RN 0.40, FH 0.30, LEG 0.57 |
+| V | QR plate installation and scan test | 7.5 | S, T (M) | 1 | 1.5 | 3 | 1.67 | 0.33 | 4.00 | FAC 3.00, RS 1.00 |
+| W | Training and dry run | 7.6 | U, V, R, G (M) | 1 | 1 | 2 | 1.17 | 0.17 | 2.80 | RS 0.50, FAC 0.50, CLN 1.50, SUP 0.30 |
+| X | Handover and operations plan | 8.2 | W (M) | 1 | 1.5 | 3 | 1.67 | 0.33 | 1.67 | FH 0.60, RS 0.40, AR 0.50, FAC 0.17 |
+| Y | Pilot operation (10 working days) | 8.1 | W (M) | 10 | 10 | 10 | 10.00 | 0.00 | 12.00 | FH 1.50, RS 2.50, RN 1.50, AR 1.50, FAC 3.00, SUP 2.00 |
+| Z | Evaluation and closing report | 1.2 | Y, X (M) | 1 | 2 | 3 | 2.00 | 0.33 | 2.00 | FH 1.00, RS 0.40, RN 0.15, AR 0.15, LEC 0.30 |
 
-Role codes: PM Farid, DEV builder (Claude Code), FAC facility unit staff, CLN cleaners, SUP supervisors, TST testers, LEC lecturer, LEG university legal or IT.
+Role codes: FH Muhammad Farid Hasyim, RN Rasyha Naufal, AR Abdillah Ridho, RS Rasyid, FAC facility unit staff, CLN cleaners, SUP supervisors, TST testers, LEC lecturer, LEG university legal or IT.
 
 **Network diagram (activity on node).**
 
@@ -325,34 +341,34 @@ Role codes: PM Farid, DEV builder (Claude Code), FAC facility unit staff, CLN cl
 | C | 2.00 | 2.33 | 4.33 | 2.33 | 4.33 | 0.00 | Yes | 14 Oct to 16 Oct | 14 Oct to 16 Oct |
 | D | 1.33 | 4.33 | 5.66 | 4.33 | 5.66 | 0.00 | Yes | 16 Oct to 19 Oct | 16 Oct to 19 Oct |
 | E | 2.33 | 5.66 | 7.99 | 5.66 | 7.99 | 0.00 | Yes | 19 Oct to 21 Oct | 19 Oct to 21 Oct |
-| F | 3.08 | 1.08 | 4.16 | 12.66 | 15.74 | 11.58 | No | 13 Oct to 16 Oct | 21 Oct to 27 Oct |
-| G | 5.17 | 1.08 | 6.25 | 18.57 | 23.74 | 17.49 | No | 13 Oct to 20 Oct | 13 Oct to 20 Oct |
-| H | 1.08 | 7.99 | 9.07 | 12.99 | 14.07 | 5.00 | No | 21 Oct to 23 Oct | 27 Oct to 28 Oct |
+| F | 3.08 | 1.08 | 4.16 | 12.66 | 15.74 | 11.58 | No | 13 Oct to 16 Oct | 13 Oct to 16 Oct |
+| G | 5.17 | 1.08 | 6.25 | 18.57 | 23.74 | 17.49 | No | 13 Oct to 20 Oct | 16 Oct to 23 Oct |
+| H | 1.08 | 7.99 | 9.07 | 12.99 | 14.07 | 5.00 | No | 21 Oct to 23 Oct | 21 Oct to 23 Oct |
 | I | 1.08 | 5.66 | 6.74 | 5.66 | 6.74 | 0.00 | Yes | 19 Oct to 20 Oct | 19 Oct to 20 Oct |
 | J | 1.58 | 6.74 | 8.32 | 6.74 | 8.32 | 0.00 | Yes | 20 Oct to 22 Oct | 20 Oct to 22 Oct |
 | K | 4.17 | 8.32 | 12.49 | 8.32 | 12.49 | 0.00 | Yes | 22 Oct to 28 Oct | 22 Oct to 28 Oct |
 | L | 3.17 | 12.49 | 15.66 | 12.49 | 15.66 | 0.00 | Yes | 28 Oct to 2 Nov | 28 Oct to 2 Nov |
 | M | 2.67 | 12.49 | 15.16 | 12.99 | 15.66 | 0.50 | No | 28 Oct to 2 Nov | 28 Oct to 2 Nov |
-| N | 3.00 | 15.66 | 18.66 | 16.49 | 19.49 | 0.83 | No | 2 Nov to 5 Nov | 3 Nov to 6 Nov |
-| O | 1.67 | 12.49 | 14.16 | 14.07 | 15.74 | 1.58 | No | 28 Oct to 30 Oct | 2 Nov to 3 Nov |
+| N | 3.00 | 15.66 | 18.66 | 16.49 | 19.49 | 0.83 | No | 2 Nov to 5 Nov | 2 Nov to 5 Nov |
+| O | 1.67 | 12.49 | 14.16 | 14.07 | 15.74 | 1.58 | No | 28 Oct to 30 Oct | 28 Oct to 30 Oct |
 | P | 7.67 | 7.99 | 15.66 | 7.99 | 15.66 | 0.00 | Yes | 21 Oct to 2 Nov | 21 Oct to 2 Nov |
 | Q | 3.83 | 15.66 | 19.49 | 15.66 | 19.49 | 0.00 | Yes | 2 Nov to 6 Nov | 2 Nov to 6 Nov |
-| R | 3.33 | 7.99 | 11.32 | 20.41 | 23.74 | 12.42 | No | 21 Oct to 27 Oct | 28 Oct to 2 Nov |
-| S | 6.33 | 14.16 | 20.49 | 15.74 | 22.07 | 1.58 | No | 30 Oct to 9 Nov | 3 Nov to 12 Nov |
+| R | 3.33 | 7.99 | 11.32 | 20.41 | 23.74 | 12.42 | No | 21 Oct to 27 Oct | 21 Oct to 27 Oct |
+| S | 6.33 | 14.16 | 20.49 | 15.74 | 22.07 | 1.58 | No | 30 Oct to 9 Nov | 30 Oct to 9 Nov |
 | T | 2.08 | 19.49 | 21.57 | 19.49 | 21.57 | 0.00 | Yes | 6 Nov to 10 Nov | 6 Nov to 10 Nov |
-| U | 2.17 | 21.57 | 23.74 | 21.57 | 23.74 | 0.00 | Yes | 10 Nov to 12 Nov | 10 Nov to 13 Nov |
-| V | 1.67 | 21.57 | 23.24 | 22.07 | 23.74 | 0.50 | No | 10 Nov to 12 Nov | 12 Nov to 13 Nov |
-| W | 1.17 | 23.74 | 24.91 | 23.74 | 24.91 | 0.00 | Yes | 12 Nov to 13 Nov | 13 Nov to 16 Nov |
-| X | 1.67 | 24.91 | 26.58 | 33.24 | 34.91 | 8.33 | No | 13 Nov to 17 Nov | 16 Nov to 18 Nov |
-| Y | 10.00 | 24.91 | 34.91 | 24.91 | 34.91 | 0.00 | Yes | 13 Nov to 27 Nov | 16 Nov to 30 Nov |
-| Z | 2.00 | 34.91 | 36.91 | 34.91 | 36.91 | 0.00 | Yes | 27 Nov to 1 Dec | 30 Nov to 2 Dec |
+| U | 2.17 | 21.57 | 23.74 | 21.57 | 23.74 | 0.00 | Yes | 10 Nov to 12 Nov | 10 Nov to 12 Nov |
+| V | 1.67 | 21.57 | 23.24 | 22.07 | 23.74 | 0.50 | No | 10 Nov to 12 Nov | 10 Nov to 12 Nov |
+| W | 1.17 | 23.74 | 24.91 | 23.74 | 24.91 | 0.00 | Yes | 12 Nov to 13 Nov | 12 Nov to 13 Nov |
+| X | 1.67 | 24.91 | 26.58 | 33.24 | 34.91 | 8.33 | No | 13 Nov to 17 Nov | 13 Nov to 17 Nov |
+| Y | 10.00 | 24.91 | 34.91 | 24.91 | 34.91 | 0.00 | Yes | 13 Nov to 27 Nov | 16 Nov to 27 Nov |
+| Z | 2.00 | 34.91 | 36.91 | 34.91 | 36.91 | 0.00 | Yes | 27 Nov to 1 Dec | 30 Nov to 1 Dec |
 
 **Result**
 
 - **Two critical paths tie.** Build path: A → B → C → D → I → J → K → L → Q → T → U → W → Y → Z. WhatsApp path: A → B → C → D → E → P → Q → T → U → W → Y → Z. Both finish at day 15.66 and feed notifications (Q). Waiting for Meta verification is as critical as writing the code.
 - **Time-only project duration:** 36.91 working days, finish 1 Dec.
-- **After resource leveling (2.8):** 37.98 working days. **Committed finish: Wed 2 Dec 2026.** Leveling uses 1.07 days of the reserve.
-- **Schedule uncertainty:** σ of the longer critical path is 2.37 days (the WhatsApp path, because verification can take 3 to 15 working days). One-sided 95% confidence uses 1.645σ, which gives 40.80 days, about 7 Dec. The chance of finishing by the committed date is about 67% (z = 0.45). Version 1.0 used 2σ and called it 95%.
+- **After resource leveling (2.8):** 37.00 working days, planned finish **Tue 1 Dec**. With four people nobody on the critical path is over capacity; only the Monday start of the pilot adds 0.09 days. **Committed finish: Wed 2 Dec 2026**, which keeps 1.00 working day of buffer.
+- **Schedule uncertainty:** σ of the longer critical path is 2.37 days (the WhatsApp path, because verification can take 3 to 15 working days). One-sided 95% confidence uses 1.645σ, which gives 40.80 days, about 7 Dec. The chance of finishing by the committed date is about 68% (z = 0.46). Version 1.0 used 2σ and called it 95%.
 - **Decisions are due by 21 Oct.** Activity E has no slack because the WhatsApp path is critical. A decision delayed by one day delays the pilot by one day.
 - **Domain before plates.** A printed QR cannot be changed, so plate production (S) waits for the domain (H) and for the production database (O) that creates the tokens.
 - **Long poles outside our control:** E (people's calendars), P (Meta review), S (printer lead time), G and F (facility unit time).
@@ -368,10 +384,10 @@ Role codes: PM Farid, DEV builder (Claude Code), FAC facility unit staff, CLN cl
 | C Friends test (5 testers) | 1.00 | Rp 200,000 | Rp 200,000 | All 5 testers test on the same day |
 | B Cross-device test and email fix | 0.50 | Rp 200,000 | Rp 400,000 | Test during the same session as the email fix |
 | U Security review before go-live | 0.67 | Rp 250,000 | Rp 373,134 | Reviewer starts reading code while hardening is finishing |
-| T Hardening and deploy to production | 0.58 | Rp 300,000 | Rp 517,241 | Second review pass in parallel with deployment checks |
+| T Hardening and deploy to production | 0.58 | Rp 200,000 | Rp 344,828 | Second review pass in parallel with deployment checks |
 | P WhatsApp account verification and templates (external wait) | 2.00 | Rp 700,000 | Rp 350,000 | Prepare Meta business documents before the decision meeting and pay for assisted onboarding (Rp 500,000) |
-| K Security core and tests | 1.00 | Rp 900,000 | Rp 900,000 | Second review pass in parallel with writing tests |
-| L Reporter flow (guest) | 0.50 | Rp 450,000 | Rp 900,000 | Reuse prototype screens |
+| K Security core and tests | 1.00 | Rp 600,000 | Rp 600,000 | Second review pass in parallel with writing tests |
+| L Reporter flow (guest) | 0.50 | Rp 300,000 | Rp 600,000 | Reuse prototype screens |
 | S QR plate production (design, quotes, print, delivery) | 2.00 | Rp 500,000 | Rp 250,000 | Express printing and courier (Rp 300,000) and a pre-approved design |
 
 | Step | Cut | Project duration | Days saved | Extra cost | Cumulative extra cost |
@@ -379,20 +395,20 @@ Role codes: PM Farid, DEV builder (Claude Code), FAC facility unit staff, CLN cl
 | 0 | Baseline | 36.91 |  | Rp 0 | Rp 0 |
 | 1 | C by 1.00 d | 35.91 | 1.00 | Rp 200,000 | Rp 200,000 |
 | 2 | S by 2.00 d (no gain: not on the critical path now) | 35.91 | 0.00 | Rp 0 | Rp 200,000 |
-| 3 | P by 2.00 d (no gain: not on the critical path now) | 35.91 | 0.00 | Rp 0 | Rp 200,000 |
-| 4 | U by 0.67 d | 35.41 | 0.50 | Rp 250,000 | Rp 450,000 |
-| 5 | B by 0.50 d | 34.91 | 0.50 | Rp 200,000 | Rp 650,000 |
-| 6 | T by 0.58 d | 34.33 | 0.58 | Rp 300,000 | Rp 950,000 |
-| 7 | K by 1.00 d (no gain: not on the critical path now) | 34.33 | 0.00 | Rp 0 | Rp 950,000 |
-| 8 | L by 0.50 d (no gain: not on the critical path now) | 34.33 | 0.00 | Rp 0 | Rp 950,000 |
+| 3 | T by 0.58 d | 35.33 | 0.58 | Rp 200,000 | Rp 400,000 |
+| 4 | P by 2.00 d (no gain: not on the critical path now) | 35.33 | 0.00 | Rp 0 | Rp 400,000 |
+| 5 | U by 0.67 d | 34.83 | 0.50 | Rp 250,000 | Rp 650,000 |
+| 6 | B by 0.50 d | 34.33 | 0.50 | Rp 200,000 | Rp 850,000 |
+| 7 | K by 1.00 d (no gain: not on the critical path now) | 34.33 | 0.00 | Rp 0 | Rp 850,000 |
+| 8 | L by 0.50 d (no gain: not on the critical path now) | 34.33 | 0.00 | Rp 0 | Rp 850,000 |
 
 Two paths are critical, so cutting only the build path (K or L) or only the WhatsApp path (P) saves nothing. Both must be cut together, which doubles the price of a saved day:
 
 | Combination | Project duration | Cumulative extra cost |
 |---|---|---|
-| C, U, B, T (steps above) | 34.33 | Rp 950,000 |
-| plus P and K together | 33.33 | Rp 2,550,000 |
-| plus P, K and L together | 32.83 | Rp 3,000,000 |
+| C, U, B, T (steps above) | 34.33 | Rp 850,000 |
+| plus P and K together | 33.33 | Rp 2,150,000 |
+| plus P, K and L together | 32.83 | Rp 2,450,000 |
 
 **Fast tracking** (parallel work, no extra effort, more risk). Starting the scaffold (I) right after the charter instead of after the friends test saves nothing alone, because the WhatsApp path is also critical. Starting WhatsApp verification (P) right after the charter, before the decision meeting, also saves nothing alone. Doing **both** saves **4.58 days** (finish about 32.33 days). Risk: if the lecturer or facility unit chooses a different provider or building, the verification work is lost and the scaffold may need rework. Recommended: start the Meta business verification paperwork now (cost: Farid's time only), and keep the scaffold after the friends test.
 
@@ -429,7 +445,7 @@ The committed baseline stays at Wed 2 Dec until the board approves the change as
 
 | Class | Items in this project |
 |---|---|
-| Direct costs (can be assigned to a work package) | Domain, cloud services, WhatsApp messages, plates and mounting kit, guide cards, SIM card, builder and project effort |
+| Direct costs (can be assigned to a work package) | Domain, cloud services, WhatsApp messages, plates and mounting kit, guide cards, SIM card, team and partner effort |
 | Indirect costs (supervision, administration, overhead) | Project manager supervision, facility unit administration, university legal and IT review, finance approval. They grow with time: a shorter project costs less |
 | Tangible benefits | Median response time, share of reports accepted, cost per report, cleaner time saved |
 | Intangible benefits | Transparency, trust of reporters, a record of work, faculty visibility |
@@ -457,48 +473,49 @@ Total cash: low Rp 9,514,744, **base Rp 14,237,993**, high Rp 23,893,341. Cloud 
 
 #### 2.6.5 Labor (in-kind) at placeholder rates
 
-Rates are placeholders to be replaced with the institution's rates. Labor is shown because most of a project's cost is often labor (Week 5).
+Rates are placeholders to be replaced with the institution's rates. Labor is shown because most of a project's cost is often labor (Week 5). All four team members use one team rate of Rp 400,000 per work-day, including the weekly meeting (WBS 1.3). Claude Code is a tool the developers already have, so it adds no cash.
 
 | Role | Work-days | Rate per day | Value |
 |---|---|---|---|
-| Farid (PM) | 24.11 | Rp 400,000 | Rp 9,644,000 |
-| Builder | 24.93 | Rp 600,000 | Not cash. Builder is Claude Code under the existing plan. Equivalent human cost Rp 14,958,000 |
+| Muhammad Farid Hasyim (project manager) | 10.76 | Rp 400,000 | Rp 4,302,000 |
+| Rasyha Naufal (lead developer) | 13.66 | Rp 400,000 | Rp 5,462,000 |
+| Abdillah Ridho (developer) | 15.29 | Rp 400,000 | Rp 6,114,000 |
+| Rasyid (field, QR and testing lead) | 13.80 | Rp 400,000 | Rp 5,518,000 |
 | Facility staff | 15.70 | Rp 200,000 | Rp 3,140,000 |
 | Cleaners | 1.50 | Rp 180,000 | Rp 270,000 |
 | Supervisors | 2.30 | Rp 300,000 | Rp 690,000 |
 | Testers | 0.50 | Rp 0 | Rp 0 |
 | Lecturer | 0.80 | Rp 0 | Rp 0 |
 | Univ. legal/IT | 2.07 | Rp 500,000 | Rp 1,035,000 |
-| In-kind labor in the baseline (all roles except the builder) |  |  | Rp 14,779,000 |
+| In-kind labor in the baseline (team and partners) |  |  | Rp 26,531,000 |
 
 #### 2.6.6 Budget summary
 
 | Line | Amount | Note |
 |---|---|---|
 | Cash to the end of the pilot (base) | Rp 14,237,993 | Range Rp 9,514,744 to Rp 23,893,341 |
-| In-kind labor (PM, facility, cleaners, supervisors, legal) | Rp 14,779,000 | Placeholder rates |
-| **Cost baseline (BAC)** | **Rp 29,016,994** | Used for earned value |
+| In-kind labor: project team of four (53.49 work-days) | Rp 21,396,000 | Rp 400,000 per work-day (placeholder) |
+| In-kind labor: facility staff, cleaners, supervisors, university legal | Rp 5,135,000 | Placeholder rates |
+| **Cost baseline (BAC)** | **Rp 40,768,992** | Used for earned value |
 | Contingency (15% of cash, reserve analysis) | Rp 2,135,699 | Known risks. Released by the project manager |
 | Management reserve (schedule uncertainty) | Rp 1,556,000 | 3.89 work-days × Rp 400,000. Released by the sponsor |
-| **Authorized budget** | **Rp 32,708,693** | Cap for the project phase |
-| Builder (Claude Code), not in the baseline | Rp 14,958,000 equivalent | Cash Rp 0 under the existing plan. Shown so the real effort is visible |
-| Authorized budget if a paid developer did the build | Rp 47,666,693 | For comparison |
+| **Authorized budget** | **Rp 44,460,691** | Cap for the project phase |
 
 ![From cash to authorized budget|w=860](budget-waterfall.png)
 
 #### 2.6.7 Reserve analysis
 
-Contingency is a percentage based on risk and complexity (Week 5). A 15% rate on cash gives Rp 2,135,699. A cross-check by expected monetary value of the main cost risks gives Rp 1,925,373 (below). The two are close, so 15% is kept.
+Contingency is a percentage based on risk and complexity (Week 5). A 15% rate on cash gives Rp 2,135,699. A cross-check by expected monetary value of the main cost risks gives Rp 1,685,373 (below). The 15% contingency covers the EMV with a margin, so it is kept.
 
 | Cost risk | Probability | Impact | EMV (P × impact) |
 |---|---|---|---|
 | Plates need partial reprint (misprint, wrong token, damage) | 25% | Rp 1,220,000 | Rp 305,000 |
 | WhatsApp direct onboarding fails, a provider (BSP) is needed for 2 months | 30% | Rp 1,500,000 | Rp 450,000 |
-| Independent reviewer finds issues, 3 extra builder days (human-equivalent) | 40% | Rp 1,800,000 | Rp 720,000 |
+| Independent reviewer finds issues, 3 extra developer days | 40% | Rp 1,200,000 | Rp 480,000 |
 | Message volume 2.5 times higher than planned during the pilot | 20% | Rp 550,489 | Rp 110,098 |
 | Exchange rate +5% on dollar-priced items (2 months) | 50% | Rp 80,550 | Rp 40,275 |
 | Domain or DNS mistake delays plate order by 1 week (extra labor) | 15% | Rp 2,000,000 | Rp 300,000 |
-| **Total EMV** |  |  | **Rp 1,925,373** |
+| **Total EMV** |  |  | **Rp 1,685,373** |
 
 The management reserve covers schedule uncertainty only: the difference between the one-sided 95% duration and the expected duration (40.80 − 36.91 = 3.89 work-days).
 
@@ -510,14 +527,14 @@ The WBS is the input and the output is the cost baseline: the time-phased budget
 
 | Week | Starts | Cash in week | Labor in week | Total in week | Cumulative (PV) | % of BAC |
 |---|---|---|---|---|---|---|
-| 1 | 12 Oct | Rp 0 | Rp 2,299,920 | Rp 2,299,920 | Rp 2,299,920 | 7.93% |
-| 2 | 19 Oct | Rp 28,827 | Rp 2,284,324 | Rp 2,313,151 | Rp 4,613,071 | 15.9% |
-| 3 | 26 Oct | Rp 2,893,330 | Rp 2,501,244 | Rp 5,394,574 | Rp 10,007,645 | 34.49% |
-| 4 | 2 Nov | Rp 3,712,272 | Rp 1,285,126 | Rp 4,997,398 | Rp 15,005,043 | 51.71% |
-| 5 | 9 Nov | Rp 6,702,811 | Rp 2,061,565 | Rp 8,764,376 | Rp 23,769,419 | 81.92% |
-| 6 | 16 Nov | Rp 412,192 | Rp 2,112,421 | Rp 2,524,613 | Rp 26,294,032 | 90.62% |
-| 7 | 23 Nov | Rp 408,497 | Rp 1,400,000 | Rp 1,808,497 | Rp 28,102,529 | 96.85% |
-| 8 | 30 Nov | Rp 80,065 | Rp 834,400 | Rp 914,465 | Rp 29,016,994 | 100% |
+| 1 | 12 Oct | Rp 0 | Rp 3,745,377 | Rp 3,745,377 | Rp 3,745,377 | 9.19% |
+| 2 | 19 Oct | Rp 2,039,637 | Rp 5,082,802 | Rp 7,122,439 | Rp 10,867,816 | 26.66% |
+| 3 | 26 Oct | Rp 3,323,082 | Rp 4,680,871 | Rp 8,003,953 | Rp 18,871,769 | 46.29% |
+| 4 | 2 Nov | Rp 2,695,089 | Rp 3,787,082 | Rp 6,482,171 | Rp 25,353,940 | 62.19% |
+| 5 | 9 Nov | Rp 5,363,191 | Rp 3,475,035 | Rp 8,838,226 | Rp 34,192,166 | 83.87% |
+| 6 | 16 Nov | Rp 408,497 | Rp 2,799,832 | Rp 3,208,329 | Rp 37,400,495 | 91.74% |
+| 7 | 23 Nov | Rp 408,497 | Rp 2,200,000 | Rp 2,608,497 | Rp 40,008,992 | 98.14% |
+| 8 | 30 Nov | Rp 0 | Rp 760,000 | Rp 760,000 | Rp 40,768,992 | 100% |
 
 #### 2.6.9 What it costs to keep it running (12 months)
 
@@ -531,14 +548,14 @@ The project budget ends after the pilot. A live system keeps costing money every
 
 ![Running cost per month after the pilot|w=860](run-cost.png)
 
-Support and maintenance by people (not cash unless paid): 2 maintainer days and 1 builder day each month, about Rp 1,400,000 per month or Rp 16,800,000 per year at the placeholder rates.
+Support and maintenance by people (not cash unless paid): 2 maintainer days and 1 developer day each month at the team rate, about Rp 1,200,000 per month or Rp 14,400,000 per year at the placeholder rates.
 
 | First-year total | Lean | Recommended | High volume |
 |---|---|---|---|
 | One-time cash (plates, kit, reviews, cards) | Rp 11,500,000 | Rp 11,500,000 | Rp 11,500,000 |
 | 12 months of running cost (cash) | Rp 16,669,800 | Rp 25,215,456 | Rp 40,506,768 |
 | **First-year cash needed** | **Rp 28,169,800** | **Rp 36,715,456** | **Rp 52,006,768** |
-| Plus support by people at placeholder rates | Rp 16,800,000 | Rp 16,800,000 | Rp 16,800,000 |
+| Plus support by people at placeholder rates | Rp 14,400,000 | Rp 14,400,000 | Rp 14,400,000 |
 
 Unit costs in the recommended scenario: about **Rp 52,532 per room per month** and **Rp 2,335 per report**. Compare these with the Week 0 baseline of what a late or lost cleaning request costs today.
 
@@ -559,7 +576,7 @@ Unit costs in the recommended scenario: about **Rp 52,532 per room per month** a
 | Item | Plan |
 |---|---|
 | Quality objectives | All 22 security tests pass. No tester needs help for the main flow. 100% of plates scan on 3 phone models. Uptime 99% or better. Health checks healthy |
-| Quality assurance (process) | One phase at a time. Security before screens. Separate development and production environments. Migrations are append-only. A second person verifies each plate installation |
+| Quality assurance (process) | One phase at a time. Security before screens. Separate development and production environments. Migrations are append-only. A second person verifies each plate installation. The other developer reviews every pull request before merge |
 | Quality control (product) | `npm run test:db` for the database. Friends test for usability. Plate samples scanned before bulk print. Security review before go-live. Weekly health check |
 | Validate Scope vs Control Quality | Control Quality asks "does it meet the specification" (tests, internal). Validate Scope asks "will the customer sign it" (4.3, external). Control Quality comes first |
 | Plate acceptance test | Sample plates scan in under 2 seconds at 30 to 60 cm on 3 phone models (2 low-end Android, 1 iPhone) in corridor light. Adhesion holds for 48 hours. 50 wipe cycles with water and a common disinfectant leave the print intact |
@@ -574,31 +591,35 @@ Resource management has six processes: plan resource management, estimate activi
 
 | Type | Resource | Quantity and availability | Cost treatment |
 |---|---|---|---|
-| Men (people) | Farid, project manager and product owner | 1, full time on weekdays (capacity 1.0) | In kind at placeholder rate |
-| Men (people) | Builder: Claude Code streams directed by Farid | Up to 2 parallel streams (capacity 2.0), limited by Farid's review time | No incremental cash. Equivalent human cost shown |
+| Men (people) | Project team: Muhammad Farid Hasyim (project manager), Rasyha Naufal (lead developer), Abdillah Ridho (developer), Rasyid (field, QR and testing lead) | 4 people, full time on weekdays (capacity 1.0 each, confirm in D18) | In kind at Rp 400,000 per work-day (placeholder) |
 | Men (people) | Facility unit staff (survey, baseline, installation) | 2 people, part time (capacity 2.0) | In kind |
 | Men (people) | Cleaners (9) and supervisors (2) | Training sessions and the pilot | In kind |
 | Men (people) | Lecturer, university legal and IT, 5 friend testers | Short sessions | Lecturer and testers free. Legal and IT in kind or ROM cash |
-| Machines (equipment) | Farid's laptop, 3 test phones, cleaners' own phones, stepladder and drill (facility unit) | Available | Owned. Data allowance optional |
+| Machines (tools) | Claude Code, the AI coding assistant used by the two developers | Already available to the team | No incremental cash |
+| Machines (equipment) | Team laptops, 3 test phones, cleaners' own phones, stepladder and drill (facility unit) | Available | Owned. Data allowance optional |
 | Materials (consumed) | 61 QR plates, mounting tape and screws, 20 guide cards, SIM card | Bought | Cash (2.6.4) |
 | Services | Domain registrar, Vercel, Supabase, Cloudflare DNS, WhatsApp Cloud API, email sending | Subscriptions | Cash (2.6.4 and 2.6.9) |
-| Space | Facility unit room for training | Available | Free |
-| Time | The most rigid resource | 34.7 to 38 working days | Reserve in 2.5 |
-| Money (secondary resource) | Authorized budget | Rp 32,708,693 | Controlled in 4.2 |
+| Space | Facility unit room for training. A room for the weekly team meeting | Available | Free |
+| Time | The most rigid resource | 32.33 (fast tracked) to 40.80 (95% confidence) working days | Reserve in 2.5 |
+| Money (secondary resource) | Authorized budget | Rp 44,460,691 | Controlled in 4.2 |
 
 #### 2.8.2 Resource breakdown structure (RBS)
 
 ```
 Go Clean It resources
-├─ Project team
-│   ├─ Farid (project manager)
-│   └─ Builder (Claude Code streams)
+├─ Project team (4)
+│   ├─ Muhammad Farid Hasyim, project manager
+│   ├─ Development
+│   │   ├─ Rasyha Naufal, lead developer (front end)
+│   │   ├─ Abdillah Ridho, developer (back end and security)
+│   │   └─ Claude Code (tool)
+│   └─ Rasyid, field, QR and testing lead
 ├─ Customer side
 │   ├─ Facility unit (staff, supervisors, cleaners)
 │   ├─ Lecturer (sponsor)
 │   └─ University legal, IT, finance
 ├─ Test users (5 friends, 2 to 3 cleaners)
-├─ Equipment (laptop, phones, tools)
+├─ Equipment (laptops, phones, tools)
 ├─ Materials (plates, tape, cards, SIM)
 └─ Services
     ├─ Domain and DNS
@@ -608,138 +629,160 @@ Go Clean It resources
 
 #### 2.8.3 Resource estimates per activity
 
-| ID | Activity | Duration te | Effort | PM | DEV | FAC | CLN | SUP | TST | LEC | LEG |
-|---|---|---|---|---|---|---|---|---|---|---|---|
-| A | Charter, plan and baseline approved | 1.08 | 1.08 | 1.08 |  |  |  |  |  |  |  |
-| B | Cross-device test and email fix | 1.25 | 1.25 | 0.60 | 0.65 |  |  |  |  |  |  |
-| C | Friends test (5 testers) | 2.00 | 2.00 | 1.50 |  |  |  |  | 0.50 |  |  |
-| D | Fix test findings | 1.33 | 1.33 | 0.33 | 1.00 |  |  |  |  |  |  |
-| E | Lecturer demo and decisions (provider, domain, building, funding) | 2.33 | 2.33 | 1.00 |  | 0.83 |  |  |  | 0.50 |  |
-| F | Site survey: room and floor list, QR placement plan | 3.08 | 5.08 | 1.08 |  | 4.00 |  |  |  |  |  |
-| G | Week 0 baseline measurement | 5.17 | 5.17 | 1.17 |  | 4.00 |  |  |  |  |  |
-| H | Domain .com bought, DNS and email records set | 1.08 | 1.08 | 0.50 | 0.58 |  |  |  |  |  |  |
-| I | Scaffold | 1.08 | 1.08 | 0.28 | 0.80 |  |  |  |  |  |  |
-| J | Schema and seed | 1.58 | 1.58 | 0.38 | 1.20 |  |  |  |  |  |  |
-| K | Security core and tests | 4.17 | 4.17 | 0.97 | 3.20 |  |  |  |  |  |  |
-| L | Reporter flow (guest) | 3.17 | 3.17 | 0.77 | 2.40 |  |  |  |  |  |  |
-| M | Cleaner flow | 2.67 | 2.67 | 0.67 | 2.00 |  |  |  |  |  |  |
-| N | Supervisor and admin (with QR sheet generator) | 3.00 | 3.00 | 0.70 | 2.30 |  |  |  |  |  |  |
-| O | Production environment and backups | 1.67 | 1.67 | 0.47 | 1.20 |  |  |  |  |  |  |
-| P | WhatsApp account verification and templates (external wait) | 7.67 | 1.00 | 0.50 |  |  |  |  |  |  | 0.50 |
-| Q | Notifications and escalation | 3.83 | 3.83 | 0.93 | 2.90 |  |  |  |  |  |  |
-| R | Privacy notice, retention and legal review | 3.33 | 2.70 | 1.20 | 0.50 |  |  |  |  |  | 1.00 |
-| S | QR plate production (design, quotes, print, delivery) | 6.33 | 1.00 | 0.80 |  | 0.20 |  |  |  |  |  |
-| T | Hardening and deploy to production | 2.08 | 2.08 | 0.58 | 1.50 |  |  |  |  |  |  |
-| U | Security review before go-live | 2.17 | 2.17 | 0.70 | 0.90 |  |  |  |  |  | 0.57 |
-| V | QR plate installation and scan test | 1.67 | 4.00 | 1.00 |  | 3.00 |  |  |  |  |  |
-| W | Training and dry run | 1.17 | 2.80 | 0.50 |  | 0.50 | 1.50 | 0.30 |  |  |  |
-| X | Handover and operations plan | 1.67 | 1.67 | 1.00 | 0.50 | 0.17 |  |  |  |  |  |
-| Y | Pilot operation (10 working days) | 10.00 | 12.00 | 4.00 | 3.00 | 3.00 |  | 2.00 |  |  |  |
-| Z | Evaluation and closing report | 2.00 | 2.00 | 1.40 | 0.30 |  |  |  |  | 0.30 |  |
+Work-days per person or role. FH Farid, RN Rasyha, AR Abdillah, RS Rasyid. The other codes are in 2.5.
 
-| Role | Total work-days |
-|---|---|
-| Farid (PM) | 24.11 |
-| Builder | 24.93 |
-| Facility staff | 15.70 |
-| Cleaners | 1.50 |
-| Supervisors | 2.30 |
-| Testers | 0.50 |
-| Lecturer | 0.80 |
-| Univ. legal/IT | 2.07 |
-| **All roles** | **71.91** |
+| ID | Activity | Lead | Duration te | Effort | FH | RN | AR | RS | FAC | CLN | SUP | TST | LEC | LEG |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| A | Charter, plan and baseline approved (with team kickoff) | Farid | 1.08 | 1.83 | 1.08 | 0.25 | 0.25 | 0.25 |  |  |  |  |  |  |
+| B | Cross-device test and email fix | Rasyha | 1.25 | 1.25 |  | 0.65 |  | 0.60 |  |  |  |  |  |  |
+| C | Friends test (5 testers) | Rasyid | 2.00 | 2.00 | 0.50 |  |  | 1.00 |  |  |  | 0.50 |  |  |
+| D | Fix test findings | Rasyha | 1.33 | 1.33 |  | 0.60 | 0.40 | 0.33 |  |  |  |  |  |  |
+| E | Lecturer demo and decisions (provider, domain, building, funding) | Farid | 2.33 | 2.33 | 0.75 | 0.25 |  |  | 0.83 |  |  |  | 0.50 |  |
+| F | Site survey: room and floor list, QR placement plan | Rasyid | 3.08 | 5.08 |  |  |  | 1.08 | 4.00 |  |  |  |  |  |
+| G | Week 0 baseline measurement | Rasyid | 5.17 | 5.17 |  |  |  | 1.17 | 4.00 |  |  |  |  |  |
+| H | Domain .com bought, DNS and email records set | Farid | 1.08 | 1.08 | 0.50 | 0.58 |  |  |  |  |  |  |  |  |
+| I | Scaffold | Rasyha | 1.08 | 1.08 |  | 0.80 | 0.28 |  |  |  |  |  |  |  |
+| J | Schema and seed | Abdillah | 1.58 | 1.58 |  | 0.38 | 1.20 |  |  |  |  |  |  |  |
+| K | Security core and tests | Abdillah | 4.17 | 4.17 |  | 0.97 | 3.20 |  |  |  |  |  |  |  |
+| L | Reporter flow (guest) | Rasyha | 3.17 | 3.17 |  | 2.40 |  | 0.77 |  |  |  |  |  |  |
+| M | Cleaner flow | Abdillah | 2.67 | 2.67 |  |  | 2.00 | 0.67 |  |  |  |  |  |  |
+| N | Supervisor and admin (with QR sheet generator) | Rasyha | 3.00 | 3.00 | 0.70 | 2.30 |  |  |  |  |  |  |  |  |
+| O | Production environment and backups | Farid | 1.67 | 1.67 | 1.20 |  |  | 0.47 |  |  |  |  |  |  |
+| P | WhatsApp account verification and templates (external wait) | Farid | 7.67 | 1.00 | 0.50 |  |  |  |  |  |  |  |  | 0.50 |
+| Q | Notifications and escalation | Abdillah | 3.83 | 3.83 |  |  | 2.90 | 0.93 |  |  |  |  |  |  |
+| R | Privacy notice, retention and legal review | Farid | 3.33 | 2.70 | 1.20 |  | 0.50 |  |  |  |  |  |  | 1.00 |
+| S | QR plate production (design, quotes, print, delivery) | Rasyid | 6.33 | 1.00 |  |  |  | 0.80 | 0.20 |  |  |  |  |  |
+| T | Hardening and deploy to production | Rasyha | 2.08 | 2.08 |  | 1.50 | 0.58 |  |  |  |  |  |  |  |
+| U | Security review before go-live | Abdillah | 2.17 | 2.17 | 0.30 | 0.40 | 0.90 |  |  |  |  |  |  | 0.57 |
+| V | QR plate installation and scan test | Rasyid | 1.67 | 4.00 |  |  |  | 1.00 | 3.00 |  |  |  |  |  |
+| W | Training and dry run | Rasyid | 1.17 | 2.80 |  |  |  | 0.50 | 0.50 | 1.50 | 0.30 |  |  |  |
+| X | Handover and operations plan | Farid | 1.67 | 1.67 | 0.60 |  | 0.50 | 0.40 | 0.17 |  |  |  |  |  |
+| Y | Pilot operation (10 working days) | Rasyid | 10.00 | 12.00 | 1.50 | 1.50 | 1.50 | 2.50 | 3.00 |  | 2.00 |  |  |  |
+| Z | Evaluation and closing report | Farid | 2.00 | 2.00 | 1.00 | 0.15 | 0.15 | 0.40 |  |  |  |  | 0.30 |  |
+
+Plus 3.70 work-days for the weekly team meeting (WBS 1.3: 1 hour a week for 4 people), shared equally and not part of the network.
+
+| Person or role | Total work-days | Share of team work |
+|---|---|---|
+| Muhammad Farid Hasyim (project manager) | 10.76 | 20% |
+| Rasyha Naufal (lead developer) | 13.66 | 26% |
+| Abdillah Ridho (developer) | 15.29 | 29% |
+| Rasyid (field, QR and testing lead) | 13.80 | 26% |
+| Facility staff | 15.70 |  |
+| Cleaners | 1.50 |  |
+| Supervisors | 2.30 |  |
+| Testers | 0.50 |  |
+| Lecturer | 0.80 |  |
+| Univ. legal/IT | 2.07 |  |
+| **All** | **76.36** |  |
 
 #### 2.8.4 Resource loading and leveling
 
-Resource loading is the amount of each resource a schedule needs in each period. The table shows average units per working day by week, before leveling (early start schedule) and after leveling. Capacity: Farid 1.0, builder 2.0, facility staff 2.0. Daily peaks matter more than weekly averages.
+Resource loading is the amount of each resource a schedule needs in each period. The table shows average units per working day by week, before and after leveling (before → after). Capacity: each team member 1.0, facility staff 2.0. Daily peaks matter more than weekly averages.
 
-| Week | Farid before | Farid after | Builder before | Builder after | Facility before | Facility after | Supervisors before | Supervisors after |
-|---|---|---|---|---|---|---|---|---|
-| Wk 1 (12 to 16 Oct) | 1.06 | 0.85 | 0.23 | 0.23 | 1.41 | 0.61 | 0.00 | 0.00 |
-| Wk 2 (19 to 23 Oct) | 0.77 | 0.67 | 0.93 | 0.76 | 0.36 | 0.88 | 0.00 | 0.00 |
-| Wk 3 (26 to 30 Oct) | 0.64 | 0.81 | 1.42 | 1.34 | 0.01 | 0.28 | 0.00 | 0.00 |
-| Wk 4 (2 to 6 Nov) | 0.53 | 0.59 | 1.24 | 1.44 | 0.03 | 0.02 | 0.00 | 0.00 |
-| Wk 5 (9 to 13 Nov) | 0.56 | 0.54 | 0.42 | 0.45 | 0.71 | 0.64 | 0.06 | 0.01 |
-| Wk 6 (16 to 20 Nov) | 0.59 | 0.61 | 0.39 | 0.34 | 0.33 | 0.36 | 0.20 | 0.21 |
-| Wk 7 (23 to 27 Nov) | 0.41 | 0.40 | 0.30 | 0.30 | 0.29 | 0.30 | 0.20 | 0.20 |
-| Wk 8 (30 Nov to 4 Dec) | 0.27 | 0.36 | 0.06 | 0.12 | 0.00 | 0.06 | 0.00 | 0.04 |
+| Week | Farid | Rasyha | Abdillah | Rasyid | Facility staff |
+|---|---|---|---|---|---|
+| Wk 1 (12 to 16 Oct) | 0.34 → 0.34 | 0.27 → 0.27 | 0.12 → 0.12 | 0.82 → 0.68 | 1.41 → 0.93 |
+| Wk 2 (19 to 23 Oct) | 0.45 → 0.45 | 0.56 → 0.56 | 0.68 → 0.68 | 0.11 → 0.25 | 0.36 → 0.83 |
+| Wk 3 (26 to 30 Oct) | 0.43 → 0.43 | 0.52 → 0.52 | 0.82 → 0.82 | 0.39 → 0.39 | 0.01 → 0.01 |
+| Wk 4 (2 to 6 Nov) | 0.17 → 0.17 | 0.66 → 0.66 | 0.66 → 0.66 | 0.38 → 0.38 | 0.03 → 0.03 |
+| Wk 5 (9 to 13 Nov) | 0.09 → 0.09 | 0.33 → 0.33 | 0.30 → 0.30 | 0.35 → 0.34 | 0.71 → 0.70 |
+| Wk 6 (16 to 20 Nov) | 0.29 → 0.29 | 0.18 → 0.18 | 0.27 → 0.27 | 0.35 → 0.35 | 0.33 → 0.33 |
+| Wk 7 (23 to 27 Nov) | 0.18 → 0.18 | 0.17 → 0.18 | 0.17 → 0.18 | 0.27 → 0.28 | 0.29 → 0.30 |
+| Wk 8 (30 Nov to 4 Dec) | 0.20 → 0.21 | 0.04 → 0.04 | 0.04 → 0.04 | 0.09 → 0.09 | 0.00 → 0.00 |
 
 | Daily peak (units per day) | Capacity | Before leveling | After leveling |
 |---|---|---|---|
-| Farid | 1.0 | 1.33 | 1.00 |
-| Builder | 2.0 | 2.22 | 1.66 |
+| Farid | 1.0 | 1.00 | 1.00 |
+| Rasyha | 1.0 | 0.85 | 0.85 |
+| Abdillah | 1.0 | 0.92 | 0.92 |
+| Rasyid | 1.0 | 1.08 | 0.85 |
 | Facility staff | 2.0 | 2.07 | 1.80 |
 
 ![Resource loading](resload.png)
 
-**Leveling steps (Week 6):** (1) network diagram and CPM, (2) table of resources per activity (2.8.3), (3) time-phased loading table (above), (4) find conflicts: Farid peaks at 1.33 per day in week 1, the builder at 2.22 when reporter flow, cleaner flow and production setup overlap, facility staff at 2.07 in week 1, (5) smooth by shifting activities inside their float.
+**Leveling steps (Week 6):** (1) network diagram and CPM, (2) table of resources per activity (2.8.3), (3) time-phased loading table (above), (4) find conflicts: Rasyid peaks at 1.08 per day in week 1 because the friends test, the site survey and the baseline overlap, and facility staff peak at 2.07, (5) smooth by shifting activities inside their float. Farid is at exactly 1.0 during the charter and kickoff, which is allowed.
 
 | Activity | Early start (day, date) | Leveled start (day, date) | Reason |
 |---|---|---|---|
-| F Site survey: room and floor list, QR placement plan | 1.08, 13 Oct | 7.98, 21 Oct | Facility staff and Farid are busy with the baseline and tests in week 1. Slack is large |
-| H Domain .com bought, DNS and email records set | 7.99, 21 Oct | 11.04, 27 Oct | Farid is overloaded in week 2. Domain is still ready well before production setup |
-| N Supervisor and admin (with QR sheet generator) | 15.66, 2 Nov | 16.81, 3 Nov | Builder capacity: reporter and cleaner flows finish first |
-| O Production environment and backups | 12.49, 28 Oct | 15.14, 2 Nov | Builder capacity during reporter and cleaner flows |
-| R Privacy notice, retention and legal review | 7.99, 21 Oct | 12.09, 28 Oct | Farid capacity in weeks 2 and 3. Large slack |
-| S QR plate production (design, quotes, print, delivery) | 14.16, 30 Oct | 16.81, 3 Nov | Waits for production environment (tokens) and builder capacity |
-| T Hardening and deploy to production | 19.49, 6 Nov | 19.81, 6 Nov | Builder capacity (follows N) |
-| U Security review before go-live | 21.57, 10 Nov | 21.89, 10 Nov | Follows T |
-| V QR plate installation and scan test | 21.57, 10 Nov | 23.14, 12 Nov | Facility staff availability and plates delivered |
-| W Training and dry run | 23.74, 12 Nov | 24.81, 13 Nov | Follows U and V |
-| X Handover and operations plan | 24.91, 13 Nov | 25.98, 16 Nov | Follows W |
-| Y Pilot operation (10 working days) | 24.91, 13 Nov | 25.98, 16 Nov | Follows W |
-| Z Evaluation and closing report | 34.91, 27 Nov | 35.98, 30 Nov | Follows Y |
+| G Week 0 baseline measurement | 1.08, 13 Oct | 4.13, 16 Oct | Rasyid runs the friends test and the site survey in week 1. The baseline has large slack |
+| Y Pilot operation (10 working days) | 24.91, 13 Nov | 25.00, 16 Nov | Date constraint: the pilot starts on a Monday (start no earlier than 16 Nov) |
+| Z Evaluation and closing report | 34.91, 27 Nov | 35.00, 30 Nov | Follows Y |
 
-**Result:** after leveling the project finishes in 37.98 working days (2 Dec), 1.07 days after the time-only schedule. No daily load is above capacity. This uses part of the management reserve.
+**Result:** after leveling the project finishes in 37.00 working days (Tue 1 Dec). People do not delay the critical path; only the Monday start of the pilot adds 0.09 days. No daily load is above capacity. The committed finish of Wed 2 Dec keeps 1.00 working day of buffer.
 
-**Resource-limited alternatives (builder capacity):** capacity 2.0 gives 37.98 days. If Farid can review only one build stream at a time (capacity 1.0), the project takes 45.33 days and finishes about 14 Dec. The plan assumes capacity 2.0. Confirm Farid's availability (decision D18).
+**Utilization.** On average the team spends about 36% of its working time on this project, so the plan fits around other courses. But several activities need most of one person's day (charter and kickoff, security core, the three flows, notifications), so the peak days must be protected. If each member can give only half a day, the finish moves to 23 Dec (table below).
 
-#### 2.8.5 Responsibility assignment matrix
+**What-if: why the team of four matters** (same leveling rules, same estimates):
 
-R does the work, A is accountable, C is consulted, I is informed. Each WBS item has one accountable person.
+| Scenario | Leveled finish | Working days | Effect |
+|---|---|---|---|
+| Team of four (this plan) | Tue 1 Dec | 37.00 | Baseline |
+| Version 2.1: Farid alone plus an AI builder with two streams | Wed 2 Dec | 37.98 | Farid was the bottleneck: 1.07 days of leveling delay and no buffer |
+| Rasyid unavailable: Farid takes his work | 3 Dec | 38.81 | 1.81 days later than this plan |
+| One developer leaves: the other takes all development | 14 Dec | 45.98 | 8.98 days later, beyond the 95% date (risk L10) |
+| Everyone half time (capacity 0.5 each, for example because of classes) | 23 Dec | 52.85 | 15.85 days later. Confirm availability in D18 before the baseline is approved |
 
-| WBS package | Farid | Builder | Lecturer | Facility unit | Cleaners | Testers | Univ. legal/IT |
+#### 2.8.5 Responsibility assignment matrix (RACI)
+
+R does the work, A is accountable, C is consulted, I is informed. Each WBS package has exactly one A. Farid is accountable for the project as a whole; each package is owned by the person who leads it.
+
+| WBS package | Farid | Rasyha | Abdillah | Rasyid | Lecturer | Facility unit | Univ. legal/IT |
 |---|---|---|---|---|---|---|---|
-| 1.1 Charter and plan | A, R | C | A (approves) | I |  |  |  |
-| 3.1 to 3.3 Tests and fixes | A | R |  |  |  | R (3.2) |  |
-| 3.4 Demo and decisions | R | C | A | C |  |  |  |
-| 3.5 Site survey and QR plan | A | I |  | R | C |  |  |
-| 3.6 Baseline | A | I | I | R |  |  |  |
-| 4.1 Domain | A, R | C | I |  |  |  |  |
-| 4.2 to 4.4 Core system | A | R |  |  |  |  |  |
-| 5.0 Applications | A | R |  | C | C | C |  |
-| 6.1 Production environment | A | R |  |  |  |  | C |
-| 6.2 WhatsApp verification | A, R | C | C | C |  |  | C |
-| 6.3 Notifications | A | R | C | C |  |  |  |
-| 7.1 Privacy and legal | A, R | C | C |  |  |  | R |
-| 7.2 QR plate production | A, R | C |  | C |  |  |  |
-| 7.3 Deploy and 7.4 Security review | A | R | I |  |  |  | R (review) |
-| 7.5 Plate installation | A | I |  | R | C |  |  |
-| 7.6 Training and dry run | A, R | R | I | R | R |  |  |
-| 8.1 Pilot operation | A | C | I | R | R |  |  |
-| 8.2 Handover | A, R | R | A (accepts) | R |  |  | C |
-| 1.2 Evaluation report | A, R | R | A (approves) | C |  |  |  |
+| 1.1 Charter and plan | R | C | C | C | A (approves) | I |  |
+| 1.2 Evaluation report | R | C | C | R (data) | A (approves) | C |  |
+| 1.3 Team coordination | A, R | R | R | R |  |  |  |
+| 3.1 and 3.3 Tests and fixes | I | A, R | R | R (tests) |  |  |  |
+| 3.2 Friends test | C | C | I | A, R |  |  |  |
+| 3.4 Demo and decisions | R | R (demo) | I | I | A | C |  |
+| 3.5 Site survey and QR plan | I | I | I | A, R |  | R |  |
+| 3.6 Week 0 baseline | I |  |  | A, R | I | R |  |
+| 4.1 Domain and DNS | A, R | R (DNS) | I |  | I |  |  |
+| 4.2 Scaffold | I | A, R | C |  |  |  |  |
+| 4.3 and 4.4 Schema, security core and tests | I | C (review) | A, R |  |  |  | C |
+| 5.1 Reporter flow | I | A, R | C (review) | R (user test) |  | C |  |
+| 5.2 Cleaner flow | I | C (review) | A, R | R (user test) |  | C |  |
+| 5.3 Supervisor and admin | R (requirements) | A, R | C (review) | C |  | C |  |
+| 6.1 Production environment and backups | A, R | C | C (accepts) | R (restore drill) |  |  | C |
+| 6.2 WhatsApp verification | A, R | I | C |  | C | C | C |
+| 6.3 Notifications and escalation | I | C | A, R | R (phone tests) | C | C |  |
+| 7.1 Privacy notice and legal review | A, R | I | R (retention job) |  | C |  | R |
+| 7.2 QR plate production | C | I | R (tokens) | A, R |  | C |  |
+| 7.3 Hardening and deploy | I | A, R | R |  | I |  |  |
+| 7.4 Security review | R (coordinates) | R (fixes) | A, R |  | I |  | R (review) |
+| 7.5 Plate installation and scan test | I |  |  | A, R |  | R |  |
+| 7.6 Training and dry run | C | C | C | A, R | I | R |  |
+| 8.1 Pilot operation | R (daily numbers) | R (on call) | R (on call) | A, R (field) | I | R |  |
+| 8.2 Handover and operations plan | A, R | C | R (runbook) | R (register) | C | C (accepts) | C |
 
-**Team development and management:** onboarding each cleaner with a one-time link and a 15-minute walk-through, a guide card, and a named contact. Control resources: track hours against the estimates every Friday and re-level when a role goes over capacity.
+**Acquire, develop and manage the team (Week 6):** the team is pre-assigned (four classmates). Kickoff on day 1: agree roles, this RACI, working hours, exam dates and the tools (GitHub, the tracker, a team WhatsApp group). Weekly team meeting every Monday (1 hour). Two-person rule: every pull request is reviewed by the other developer, and Rasyid pairs with a developer for scan tests and pilot on-call. Disagreements are raised at the weekly meeting; Farid decides if the team cannot agree, and records it. Good work is named in the Friday status. Cleaners are onboarded with a one-time link, a 15-minute walk-through, a guide card and a named contact (Rasyid).
+
+**Control resources:** every Friday each team member logs hours against 2.8.3. Re-level when anyone is above 1.0 per day for more than two days, or is unavailable. Use the what-if table to see the effect on the finish date.
 
 ### 2.9 Communication management
 
+**Communication channels** = n(n − 1) ÷ 2. The team alone has 4 × 3 ÷ 2 = 6 channels. Adding the lecturer and the facility coordinator gives 6 people and 15 channels. To keep this simple, Farid is the single contact for the lecturer, the faculty and the facility unit, and Rasyid is the contact for cleaners and supervisors.
+
 | What | Audience | Owner | How often | Channel |
 |---|---|---|---|---|
+| Team meeting: done last week, plan this week, blockers, risks, hours | Project team (4) | Farid | Every Monday, 1 hour | In person or video call. Notes in the tracker |
+| Daily check-in: done, doing, blocked | Project team | Each member | Every working day | Team WhatsApp group |
+| Code review | Developers | Rasyha and Abdillah | Every pull request | GitHub |
 | Weekly status (tracker, S-curve in rupiah, risks, decisions needed) | Lecturer, facility unit | Farid | Every Friday | Message with a link to the tracker |
-| Demo | Lecturer, facility unit | Farid | Week 2 and after go-live | Live on a phone |
+| Demo | Lecturer, facility unit | Farid and Rasyha | Week 2 and after go-live | Live on a phone |
 | Decision request with a date | Decision owner | Farid | When due (2.10) | Written |
 | Change request outcome | Requester | Farid | Within 3 working days | Message |
 | Monthly cost report | Faculty | Farid | Monthly after go-live | One-page summary |
-| Go-live notice and how to report | All reporters | Facility unit | Before the pilot | Notice board and the plate text |
-| Pilot instructions | Cleaners, supervisors | Facility unit and Farid | Before the pilot | Guide card, 15-minute walk-through, WhatsApp message |
-| Incident notice (system down, data problem) | Facility unit, lecturer | Farid or maintainer | Within 30 minutes of detection | Phone call or message |
-| Broken or missing plate report | Supervisor | Cleaners | Weekly round | Supervisor list |
+| Go-live notice and how to report | All reporters | Facility unit and Rasyid | Before the pilot | Notice board and the plate text |
+| Pilot instructions | Cleaners, supervisors | Rasyid with the facility unit | Before the pilot | Guide card, 15-minute walk-through, WhatsApp message |
+| Pilot daily numbers (reports, time to accept, open items) | Team, facility unit | Rasyid | Every pilot day | Message with counts |
+| Incident notice (system down, data problem) | Facility unit, lecturer, team | Abdillah (on call), Rasyha as backup | Within 30 minutes of detection | Phone call or message |
+| Broken or missing plate report | Supervisor, Rasyid | Cleaners | Weekly round | Supervisor list |
 | Evaluation report | Lecturer, facility unit, faculty, university IT | Farid | 2 Dec | Document |
 
 ### 2.10 Risk management
 
-Process (Week 3 mapping): plan risk management, identify risks, qualitative analysis, quantitative analysis, plan responses, control risks. Scoring: probability P and impact I from 1 to 5. Score = P × I. Threat responses: avoid, transfer, mitigate, accept, escalate. Opportunity responses: exploit, share, enhance, accept. R1 to R10 carry over from version 1.0 (R3, R5 and R9 rewritten for a live system). R11 (prototype mistaken for the finished system) is closed. L1 to L9 are new risks of running a live system.
+Process (Week 3 mapping): plan risk management, identify risks, qualitative analysis, quantitative analysis, plan responses, control risks. Scoring: probability P and impact I from 1 to 5. Score = P × I. Threat responses: avoid, transfer, mitigate, accept, escalate. Opportunity responses: exploit, share, enhance, accept. R1 to R10 carry over from version 1.0 (R3, R5 and R9 rewritten for a live system). R11 (prototype mistaken for the finished system) is closed. L1 to L9 are new risks of running a live system. L10 is the risk of working as a team of four.
 
 | ID | Risk | P | I | Score | Response | Plan | Trigger | Owner |
 |---|---|---|---|---|---|---|---|---|
@@ -749,24 +792,25 @@ Process (Week 3 mapping): plan risk management, identify risks, qualitative anal
 | R4 | Personal data mishandled (names, numbers, photos) | 2 | 5 | 10 | Mitigate | Privacy notice, RLS, retention job, no cleaner access to reporter data, security review | Real data in the open prototype table | Farid |
 | R5 | Open prototype table abused | 3 | 2 | 6 | Accept | Replaced by the secured system. Tell testers it is public | Odd rows appear | Farid |
 | R6 | Decision-makers unavailable (decisions due 21 Oct) | 3 | 4 | 12 | Mitigate | Book dates now. Every decision has a default (2.10 list) | No answer by 19 Oct | Farid |
-| R7 | Security core takes longer (p = 6 days) | 3 | 3 | 9 | Mitigate | Start early, reserve, crash option in 2.5 | K not done by 28 Oct | Builder |
+| R7 | Security core takes longer (p = 6 days) | 3 | 3 | 9 | Mitigate | Start early, reserve, crash option in 2.5 | K not done by 28 Oct | Abdillah |
 | R8 | Spam or prank reports once plates are public | 3 | 3 | 9 | Mitigate | Rate limits, bot check, retire a QR | Report spike | Farid |
 | R9 | Running cost higher than planned (message volume, exchange rate) | 3 | 3 | 9 | Mitigate | Notify 2 cleaners first. Monthly cost report. Budget range in 2.6 | Month over 25% above plan | Farid |
 | R10 | University wants campus-only reporting | 2 | 3 | 6 | Avoid | Ask in D11. Add a campus email check if required | Answer is yes | Lecturer |
 | L1 | Domain expires or the registrar account is lost, so every plate stops working | 2 | 5 | 10 | Mitigate | Register under an institutional email with 2 admins, 2-factor login, auto-renew, calendar alerts 60 and 30 days before expiry, 3-year registration if allowed | Renewal notice not handled 30 days before | Facility unit and Farid |
-| L2 | Database outage or data loss | 2 | 5 | 10 | Mitigate | Supabase Pro daily backups, weekly export, restore drill, monitoring | Alert or failed restore drill | Builder |
+| L2 | Database outage or data loss | 2 | 5 | 10 | Mitigate | Supabase Pro daily backups, weekly export, restore drill, monitoring | Alert or failed restore drill | Abdillah |
 | L3 | Plates stolen, peeled, damaged or lost after renovation | 4 | 3 | 12 | Mitigate | Acrylic plates, 10% spares, weekly round, register with photos, replace within 3 working days, retire old tokens | Plate missing at a round | Facility unit |
-| L4 | A plate is installed in the wrong place or carries the wrong token | 3 | 4 | 12 | Mitigate | Two-person install, scan test per plate, register photo, 10% inspection before install | Scan opens the wrong room | Facility unit |
+| L4 | A plate is installed in the wrong place or carries the wrong token | 3 | 4 | 12 | Mitigate | Two-person install, scan test per plate, register photo, 10% inspection before install | Scan opens the wrong room | Rasyid |
 | L5 | WhatsApp number restricted or banned | 2 | 4 | 8 | Mitigate | Official Cloud API, approved templates, consent, no bulk marketing, quality monitoring | Quality rating drops | Farid |
-| L6 | Only one person can maintain the system after the pilot | 3 | 4 | 12 | Mitigate | Handover, runbook, second admin on every account, code in an institutional GitHub organization | Farid leaves the project | Lecturer and facility unit |
-| L7 | Poor Wi-Fi or mobile signal at the plate location | 3 | 3 | 9 | Mitigate | Test signal during the site survey. Lightweight page. Data allowance if needed | Slow load at a plate | Facility unit |
+| L6 | Only one person can maintain the system after the pilot | 3 | 4 | 12 | Mitigate | Handover, runbook, second admin on every account, code in an institutional GitHub organization | A team member leaves the project | Lecturer and facility unit |
+| L7 | Poor Wi-Fi or mobile signal at the plate location | 3 | 3 | 9 | Mitigate | Test signal during the site survey. Lightweight page. Data allowance if needed | Slow load at a plate | Rasyid and facility unit |
 | L8 | Reporters photograph people | 3 | 3 | 9 | Mitigate | Hint on the form. EXIF stripped. 90-day photo retention | A photo with a face is found | Farid |
 | L9 | Payment method for dollar services is not available (international card) | 3 | 3 | 9 | Mitigate | Institutional virtual card (decision D15). Prepay one quarter | Card declined | Faculty finance |
-| O1 | Opportunity: facility unit adopts the QR flow earlier than planned | 2 | 4 | 8 | Enhance | Give them the sticker sheets and a short guide early | Facility unit asks for plates | Farid |
+| L10 | A team member is unavailable (exams, illness) or the workload is uneven | 3 | 4 | 12 | Mitigate | Every package has a backup person who reviews it. Weekly hours check. Exam dates in the team calendar from day 1. If a developer drops out the other takes over (finish about 14 Dec, 2.8.4) | Someone logs under half the planned hours for a week | Farid |
+| O1 | Opportunity: facility unit adopts the QR flow earlier than planned | 2 | 4 | 8 | Enhance | Give them the sticker sheets and a short guide early | Facility unit asks for plates | Rasyid |
 
 ![Risk matrix: probability and impact|w=820](risk-matrix.png)
 
-7 threats score 12 or more, so the risk indicator in 4.1 starts at red. Review the register every Friday. The cost effect of the main risks is in the EMV table (2.6.7).
+8 threats score 12 or more, so the risk indicator in 4.1 starts at red. Review the register every Friday. The cost effect of the main risks is in the EMV table (2.6.7).
 
 **Decisions with dates (these are risk responses).** The default applies if nobody answers by the date.
 
@@ -780,16 +824,16 @@ Process (Week 3 mapping): plan risk management, identify risks, qualitative anal
 | D6 | One supervisor per faculty with a reachable number | 21 Oct | Facility unit | Facility unit coordinator |  |
 | D7 | Pilot building, number of floors and rooms | 21 Oct | Lecturer | Gedung A, 4 floors, 40 places |  |
 | D8 | Week 0 baseline measured manually | Starts 13 Oct | Facility unit | Start with notes on paper |  |
-| D9 | QR layout: room, toilet (outside and inside), floor and lobby plates | 21 Oct | Facility unit and Farid | Table in 2.14 |  |
+| D9 | QR layout: room, toilet (outside and inside), floor and lobby plates | 21 Oct | Facility unit and Rasyid | Table in 2.14 |  |
 | D10 | One coordinator number or one per building | 21 Oct | Facility unit | One number |  |
 | D11 | Guests from outside campus allowed | 21 Oct | Lecturer | Yes, with limits |  |
 | D12 | Email address for notifications | Now | Farid | Farid's address |  |
 | D13 | Domain name (.com), registrar, and which email owns the registrar account | 21 Oct | Farid and lecturer | Institutional email, two admins |  |
 | D14 | Who pays the year-1 running cost and from which budget line | Before 6 Nov | Faculty | Recommended scenario, Rp 25.22 million |  |
 | D15 | Payment method for dollar services (institutional virtual card) | 27 Oct | Faculty finance | Prepay by the faculty |  |
-| D16 | Who maintains the system after the pilot, and support hours | 13 Nov | Facility unit and lecturer | Facility coordinator plus Farid until handover |  |
+| D16 | Who maintains the system after the pilot, and support hours | 12 Nov | Facility unit and lecturer | Facility coordinator plus Farid until handover |  |
 | D17 | Dedicated SIM number for the WhatsApp business number: owner and top-up | 21 Oct | Facility unit | Facility unit buys and owns it |  |
-| D18 | Farid's weekly availability (full time assumed) | 16 Oct | Farid | Full time on weekdays |  |
+| D18 | Each team member's weekly availability and exam dates (full time assumed) | 16 Oct | Each team member, collected by Farid | Full time on weekdays. At half time the finish moves to 23 Dec (2.8.4) |  |
 
 ### 2.11 Procurement management
 
@@ -802,11 +846,11 @@ Processes (Week 3 mapping): plan procurement, conduct procurement, control procu
 | Database | Buy | Supabase Pro (US$25 per month, 7-day daily backups) | Daily backups, Singapore region, standard Postgres, no lock-in | Monthly subscription | Same day | 27 Oct | Farid |
 | WhatsApp sending | Buy | Meta WhatsApp Cloud API directly (no platform fee, per-message charges) or a provider such as Qontak (about Rp 750,000 per month plus messages, unverified) | Total monthly cost, template approval support, ease of integration, support in Bahasa | Pay per message (plus provider fee if any) | 3 to 15 working days for verification | 21 Oct | Farid |
 | Business phone number (SIM) | Buy | Any Indonesian prepaid operator | Not registered in a normal WhatsApp app, stays active | Prepaid | 1 day | 21 Oct | Facility unit |
-| QR plates | Buy | Local acrylic and UV print shops (3 quotes). Marketplace sellers for samples | Unit price at 61 pieces, UV print durability, QR contrast, sample before order, delivery time, reprint policy, accepts vector files, tape included | Fixed price per order | 4 to 10 working days | 3 Nov | Farid |
-| Security review | Buy or in kind | University IT, an independent reviewer | Experience with web apps and Postgres row-level security, written report, availability | Fixed fee or in kind | 1 to 4 working days | 6 Nov | Farid |
+| QR plates | Buy | Local acrylic and UV print shops (3 quotes). Marketplace sellers for samples | Unit price at 61 pieces, UV print durability, QR contrast, sample before order, delivery time, reprint policy, accepts vector files, tape included | Fixed price per order | 4 to 10 working days | 30 Oct | Rasyid |
+| Security review | Buy or in kind | University IT, an independent reviewer | Experience with web apps and Postgres row-level security, written report, availability | Fixed fee or in kind | 1 to 4 working days | 6 Nov | Abdillah |
 | Legal and privacy review | In kind or buy | University legal office, external lawyer | Knows UU PDP, Bahasa Indonesia notice | In kind or fixed fee | 2 to 6 working days | 2 Nov | Lecturer |
-| Email sending | Buy | Resend free plan (3,000 emails a month, 100 a day) or Web3Forms free plan | Own domain authentication (SPF, DKIM, DMARC), volume | Free tier | Same day | 27 Oct | Farid |
-| Build and test | Make | Farid and Claude Code | n/a | Internal | n/a | n/a | Farid |
+| Email sending | Buy | Resend free plan (3,000 emails a month, 100 a day) or Web3Forms free plan | Own domain authentication (SPF, DKIM, DMARC), volume | Free tier | Same day | 27 Oct | Abdillah |
+| Build and test | Make | Rasyha Naufal and Abdillah Ridho with Claude Code | n/a | Internal (team) | n/a | n/a | Rasyha |
 
 **Account ownership rule:** every vendor account is created with an institutional email, has at least two admins, uses 2-factor login, and is documented in the runbook. Payments use the institutional card or a prepaid budget (D15). This protects the system if one person leaves.
 
@@ -814,13 +858,13 @@ Processes (Week 3 mapping): plan procurement, conduct procurement, control procu
 
 ### 2.12 Stakeholder engagement plan
 
-See 1.2. Targets: lecturer and facility unit from supportive to leading by the pilot start. Faculty from neutral to supportive after the one-page cost summary. Cleaners from unaware to supportive: involve 2 to 3 of them in the dry run and ask what they would change. University IT and legal receive the privacy notice and the data classification before the pilot. Finance receives the payment request (D15) early.
+See 1.2. Targets: lecturer and facility unit from supportive to leading by the pilot start. Faculty from neutral to supportive after the one-page cost summary. Cleaners from unaware to supportive: involve 2 to 3 of them in the dry run and ask what they would change. University IT and legal receive the privacy notice and the data classification before the pilot. Finance receives the payment request (D15) early. Inside the team: agree roles at the kickoff, keep the RACI current, and share credit in the Friday status.
 
 ### 2.13 Integration management and change control
 
 **Baselines:** scope baseline (2.3 and 2.4), schedule baseline (2.5), cost baseline (2.6). Work performed is the approved plan plus approved changes. Baselines change only through an approved change request.
 
-**Change control board (CCB):** Farid (chair), the lecturer, and the facility unit coordinator. Two of three members must agree. Decisions are recorded in the change log.
+**Change control board (CCB):** Farid (chair), the lecturer, and the facility unit coordinator. Two of three members must agree. Rasyha attends as technical advisor without a vote. Decisions are recorded in the change log.
 
 | Step | Who | What |
 |---|---|---|
@@ -844,6 +888,7 @@ See 1.2. Targets: lecturer and facility unit from supportive to leading by the p
 | CR-05 | 15 Oct | Admin "plate check" page that shows the room without creating a report | Farid | About 0.3 work-day inside package 5.3 | Pending approval |
 | CR-06 | 15 Oct | Start WhatsApp verification before the decision meeting (fast tracking) | Farid | Saves up to 4.6 days with the scaffold. Risk if the provider choice changes | Pending approval |
 | CR-07 | 15 Oct | Several plates may point to one room (inside and outside a toilet) in the plate table | Farid | No schema change. The table already allows it | Pending approval |
+| CR-08 | 15 Oct | Team of four replaces "one project manager plus AI builder": work assigned to named people, team labor counted in the baseline | Farid | Planned finish Tue 1 Dec instead of Wed 2 Dec (committed date unchanged). Cost baseline Rp 40.77 million instead of Rp 29.02 million. Cash unchanged | Pending approval |
 
 ### 2.14 QR deployment plan (physical plates)
 
@@ -917,7 +962,7 @@ The register is the `qr_code` table in the production database plus an exported 
 | Type | Room, toilet inside, floor, lobby | Behavior of the page |
 | Building, floor, room | Gedung A, 2, Ruang Kuliah A-201 | Where it points |
 | Location note | Left of door, QR center 130 cm | To find and replace it |
-| Installed date and by | 13 Nov, two named staff | Accountability |
+| Installed date and by | 12 Nov, Rasyid and one facility staff | Accountability |
 | Photo | Wall photo after install | Proof and later comparison |
 | Scan test | Pass on 3 phone models, date | Acceptance |
 | Status | Active, damaged, retired | Retired tokens stop working (S22) |
@@ -928,15 +973,15 @@ The register is the `qr_code` table in the production database plus an exported 
 
 | Step | Who | When | Output |
 |---|---|---|---|
-| 1. Site survey: walk each floor with the floor plan, list every place, mark the plate spot, photograph it, check phone signal | Facility unit, Farid | 21 Oct to 27 Oct | Room and floor list, placement plan, signal notes |
-| 2. Buy the domain, set DNS, deploy production | Farid, builder | 27 Oct to 3 Nov | Live domain with HTTPS. Production database |
-| 3. Generate tokens in the production database and the print files named by plate ID | Builder | from 3 Nov | Print files, register rows (status "planned") |
-| 4. Print 3 sample plates and test them on 5 phones in corridor light, plus adhesion and wipe tests | Farid, facility unit | first 2 days of plate production | Sample test record |
-| 5. Order with 3 quotes. Inspect delivery: count, spelling, QR contrast, 10% random token check against the register | Farid, facility unit | 3 Nov to 12 Nov | Inspection record |
-| 6. Install in pairs, one mounts and one scans and records. Start with one floor, then the rest | Facility staff | 12 Nov to 13 Nov | Register rows (status "active"), photos |
+| 1. Site survey: walk each floor with the floor plan, list every place, mark the plate spot, photograph it, check phone signal | Facility unit, Rasyid | 13 Oct to 16 Oct | Room and floor list, placement plan, signal notes |
+| 2. Buy the domain, set DNS, deploy production | Farid, Rasyha | 21 Oct to 30 Oct | Live domain with HTTPS. Production database |
+| 3. Generate tokens in the production database and the print files named by plate ID | Abdillah, checked by Rasyid | from 30 Oct | Print files, register rows (status "planned") |
+| 4. Print 3 sample plates and test them on 5 phones in corridor light, plus adhesion and wipe tests | Rasyid, facility unit | first 2 days of plate production | Sample test record |
+| 5. Order with 3 quotes. Inspect delivery: count, spelling, QR contrast, 10% random token check against the register | Rasyid, facility unit | 30 Oct to 9 Nov | Inspection record |
+| 6. Install in pairs, one mounts and one scans and records. Start with one floor, then the rest | Facility staff with Rasyid | 10 Nov to 12 Nov | Register rows (status "active"), photos |
 | 7. Scan check with the admin plate check page. It shows the room name and does not create a report or alert cleaners | Facility staff | During install | Pass or fail per plate |
-| 8. Announce "QR live" with a notice at the entrance | Facility unit | 13 Nov | Notice posted |
-| 9. Watch scan counts in the first week and check plates with zero scans | Farid | First week of the pilot | Check list |
+| 8. Announce "QR live" with a notice at the entrance | Facility unit | 12 Nov | Notice posted |
+| 9. Watch scan counts in the first week and check plates with zero scans | Rasyid | First week of the pilot | Check list |
 
 #### 2.14.7 Maintenance and misuse
 
@@ -957,30 +1002,31 @@ The register is the `qr_code` table in the production database plus an exported 
 1. One phase at a time. Re-read the matching sections of the blueprint before starting.
 2. Security before screens: package 4.4 must be green before 5.1 to 5.3 begin.
 3. One commit per phase after typecheck, lint and tests pass. Development and production are separate environments.
-4. End every phase with a 5-line summary in English and Bahasa Indonesia: what was built, why, how Farid verifies it, what is next.
+4. End every phase with a 5-line summary in English and Bahasa Indonesia: what was built, why, how the reviewer verifies it, what is next.
 5. Do not change the data model or security rules without updating the blueprint in the same commit.
 6. Keep the service role key out of client code, logs and git. Production secrets live only in the vendor dashboards.
 7. No QR plate is printed before the domain is live and the tokens exist in the production database.
 8. Direct and manage work with the PMIS: GitHub (code and docs), the tracker file, and this plan.
+9. Two-person rule: every pull request is reviewed by the other developer before merge, and every plate installation is checked by a second person.
 
 **Week-by-week execution plan** (leveled dates)
 
 | Week | Dates | Activities in progress | Done when (proof) |
 |---|---|---|---|
-| 1 | 12 to 16 Oct | A, B, C, D, G | Plan approved. Email works. Test sheets filled. Baseline observation started |
-| 2 | 19 to 23 Oct | D, E, F, G, I, J, K, P | Findings fixed. Demo held. Decisions answered by 21 Oct. WhatsApp verification started. Scaffold and schema. Baseline done |
-| 3 | 26 to 30 Oct | F, H, K, L, M, P, R | Site survey and placement plan done. Domain live. Security tests green. Privacy notice drafted |
-| 4 | 2 to 6 Nov | L, M, N, O, P, Q, R, S, T | Production environment and restore drill. Guest, cleaner, supervisor and admin screens. WhatsApp verified. Notifications and escalation. Sample plates passed, plates ordered |
-| 5 | 9 to 13 Nov | S, T, U, V, W | Deployed on the .com. Security review done. Plates delivered, installed and scan-tested. Dry run started |
-| 6 | 16 to 20 Nov | W, X, Y | Dry run done. Pilot running from 16 Nov. Handover plan drafted |
-| 7 | 23 to 27 Nov | Y | Pilot running. Weekly status with counts |
-| 8 | 30 Nov to 4 Dec | Y, Z | Pilot ends 30 Nov. Evaluation report accepted 2 Dec |
+| 1 | 12 to 16 Oct | A, B, C, D, F, G | Plan approved and team kickoff held. Email works. Friends test done. Site survey done. Baseline observation started |
+| 2 | 19 to 23 Oct | D, E, G, H, I, J, K, P, R | Findings fixed. Demo held. Decisions answered by 21 Oct. Scaffold and schema. Domain live. WhatsApp verification started. Baseline done |
+| 3 | 26 to 30 Oct | K, L, M, O, P, R, S | Security tests green (28 Oct). Privacy notice drafted. Production environment and restore drill. Plate design and quotes started |
+| 4 | 2 to 6 Nov | L, M, N, P, Q, S, T | Guest and cleaner screens. WhatsApp verified. Supervisor and admin screens. Notifications and escalation. Sample plates passed, plates ordered |
+| 5 | 9 to 13 Nov | S, T, U, V, W, X | Plates delivered. Deployed on the .com. Security review done. Plates installed and scan-tested. Training and dry run done |
+| 6 | 16 to 20 Nov | X, Y | Pilot running from Mon 16 Nov. Runbook and handover plan done |
+| 7 | 23 to 27 Nov | Y | Pilot running. Pilot ends Fri 27 Nov |
+| 8 | 30 Nov to 4 Dec | Z | Evaluation report on Tue 1 Dec, accepted by the committed date, Wed 2 Dec |
 
-**Conduct procurement:** book the domain on 27 Oct; order the plates after samples pass (3 Nov); start Meta verification on 21 Oct; confirm Vercel, Supabase and the payment method before 2 Nov.
+**Conduct procurement:** book the domain on 21 Oct; order the plates after samples pass (30 Oct); start Meta verification on 21 Oct; confirm Vercel, Supabase and the payment method before 28 Oct.
 
 **Quality assurance in execution:** friends test, sample plates, restore drill, security review, dry run, weekly health check ([PROJECT-PLAN.md](PROJECT-PLAN.md) section 5.3).
 
-**Managing the team and stakeholders:** one phase per builder session with the blueprint and this plan as inputs. Farid reviews each summary before the next phase. Friday status message. Weekly 15-minute check with the facility unit.
+**Managing the team and stakeholders:** weekly team meeting on Monday and a daily check-in in the team group (2.9). The developers work one phase per Claude Code session with the blueprint and this plan as inputs; the other developer reviews before merge. Farid reviews each phase summary before the next phase starts. Rasyid keeps the plate register and the pilot numbers. Friday status message. Weekly 15-minute check with the facility unit.
 
 ## 4. MONITORING AND CONTROLLING (Pemantauan dan Pengendalian): the evaluation plan
 
@@ -1022,13 +1068,13 @@ Planned value PV comes from the time-phased baseline in 2.6.8. Earned value EV i
 | TE | ATE + (OD − ATE × SPI) ÷ SPI | Estimated total time. ATE actual time spent, OD original duration |
 | TCPI | (BAC − EV) ÷ (BAC − AC) | Efficiency needed from now to stay in budget |
 
-**Worked example (illustration only, not real data).** End of week 5: PV = Rp 23,769,419, BAC = Rp 29,016,994. Suppose accepted work is worth EV = Rp 22,000,000 and Rp 24,000,000 has been spent.
+**Worked example (illustration only, not real data).** End of week 5: PV = Rp 34,192,166, BAC = Rp 40,768,992. Suppose accepted work is worth EV = Rp 32,000,000 and Rp 35,000,000 has been spent.
 
-- SV = Rp 22,000,000 − Rp 23,769,419 = **−Rp 1,769,419**. CV = Rp 22,000,000 − Rp 24,000,000 = **−Rp 2,000,000**.
-- SPI = 0.93 (amber, behind). CPI = 0.92 (amber, over budget).
-- Progress is 76% (above 50%), so ETC = (Rp 29,016,994 − Rp 22,000,000) ÷ 0.92 = **Rp 7,627,167**. EAC = AC + ETC = Rp 24,000,000 + Rp 7,627,167 = **Rp 31,627,167**. VAC = Rp 29,016,994 − Rp 31,627,167 = **−Rp 2,610,173**. TCPI = 1.40.
-- Time: ATE = 25 working days, OD = 37.98. TE = 25 + (37.98 − 25 × 0.93) ÷ 0.93 = **40.84 working days**, about 2.86 days late.
-- Reading: the project is about 7% behind and 8% over budget. The forecast overrun of Rp 2,610,173 is larger than the contingency of Rp 2,135,699. The board would choose between crashing (2.5), cutting a requirement, or accepting a later finish.
+- SV = Rp 32,000,000 − Rp 34,192,166 = **−Rp 2,192,166**. CV = Rp 32,000,000 − Rp 35,000,000 = **−Rp 3,000,000**.
+- SPI = 0.94 (amber, behind). CPI = 0.91 (amber, over budget).
+- Progress is 78% (above 50%), so ETC = (Rp 40,768,992 − Rp 32,000,000) ÷ 0.91 = **Rp 9,636,255**. EAC = AC + ETC = Rp 35,000,000 + Rp 9,636,255 = **Rp 44,636,255**. VAC = Rp 40,768,992 − Rp 44,636,255 = **−Rp 3,867,263**. TCPI = 1.52.
+- Time: ATE = 25 working days, OD = 37.00. TE = 25 + (37.00 − 25 × 0.94) ÷ 0.94 = **39.36 working days**, about 2.36 days late.
+- Reading: the project is about 6% behind and 9% over budget. The forecast overrun of Rp 3,867,263 is larger than the contingency of Rp 2,135,699. The board would choose between crashing (2.5), cutting a requirement, or accepting a later finish.
 
 ![Earned value at the end of week 5|w=640](evm-example.png)
 
@@ -1036,14 +1082,14 @@ Planned value PV comes from the time-phased baseline in 2.6.8. Earned value EV i
 
 | Week | PV (cumulative) | EV | AC | SV | CV | SPI | CPI | ETC | EAC | Status |
 |---|---|---|---|---|---|---|---|---|---|---|
-| 1 | Rp 2,299,920 |  |  |  |  |  |  |  |  |  |
-| 2 | Rp 4,613,071 |  |  |  |  |  |  |  |  |  |
-| 3 | Rp 10,007,645 |  |  |  |  |  |  |  |  |  |
-| 4 | Rp 15,005,043 |  |  |  |  |  |  |  |  |  |
-| 5 | Rp 23,769,419 |  |  |  |  |  |  |  |  |  |
-| 6 | Rp 26,294,032 |  |  |  |  |  |  |  |  |  |
-| 7 | Rp 28,102,529 |  |  |  |  |  |  |  |  |  |
-| 8 | Rp 29,016,994 |  |  |  |  |  |  |  |  |  |
+| 1 | Rp 3,745,377 |  |  |  |  |  |  |  |  |  |
+| 2 | Rp 10,867,816 |  |  |  |  |  |  |  |  |  |
+| 3 | Rp 18,871,769 |  |  |  |  |  |  |  |  |  |
+| 4 | Rp 25,353,940 |  |  |  |  |  |  |  |  |  |
+| 5 | Rp 34,192,166 |  |  |  |  |  |  |  |  |  |
+| 6 | Rp 37,400,495 |  |  |  |  |  |  |  |  |  |
+| 7 | Rp 40,008,992 |  |  |  |  |  |  |  |  |  |
+| 8 | Rp 40,768,992 |  |  |  |  |  |  |  |  |  |
 
 ### 4.3 Validate scope, control scope, control schedule
 
@@ -1054,21 +1100,21 @@ Planned value PV comes from the time-phased baseline in 2.6.8. Earned value EV i
 | Approved charter and plan (1.1) | Lecturer | 13 Oct |  |
 | Friends test report (3.2, 3.3) | Farid | 19 Oct |  |
 | Decisions list answered (3.4) | Lecturer and facility unit | 21 Oct |  |
-| Site survey and QR placement plan (3.5) | Facility unit | 27 Oct |  |
-| Domain live with HTTPS (4.1) | Farid | 28 Oct |  |
+| Site survey and QR placement plan (3.5) | Facility unit | 16 Oct |  |
+| Domain live with HTTPS (4.1) | Farid | 23 Oct |  |
 | Security core with 22 tests green (4.4) | Farid | 28 Oct |  |
-| Reporter, cleaner, supervisor, admin screens (5.0) | Facility unit | 6 Nov |  |
-| Production environment and restore drill (6.1) | Farid | 3 Nov |  |
+| Reporter, cleaner, supervisor, admin screens (5.0) | Facility unit | 5 Nov |  |
+| Production environment and restore drill (6.1) | Abdillah | 30 Oct |  |
 | WhatsApp verified and templates approved (6.2) | Farid | 2 Nov |  |
 | Notifications and escalation (6.3) | Facility unit | 6 Nov |  |
-| Privacy notice and retention (7.1) | University legal | 2 Nov |  |
-| QR plates delivered and checked (7.2) | Facility unit | 12 Nov |  |
+| Privacy notice and retention (7.1) | University legal | 27 Oct |  |
+| QR plates delivered and checked (7.2) | Facility unit | 9 Nov |  |
 | Deployed system with monitoring (7.3) | Farid | 10 Nov |  |
-| Security review report (7.4) | University IT | 13 Nov |  |
-| QR plates installed and scan-tested (7.5) | Facility unit and supervisors | 13 Nov |  |
-| Training and dry run (7.6) | Facility unit and supervisors | 16 Nov |  |
-| Runbook and support plan (8.2) | Facility unit and lecturer | 18 Nov |  |
-| Pilot data and evaluation report (8.1, 1.2) | Lecturer | 2 Dec |  |
+| Security review report (7.4) | University IT | 12 Nov |  |
+| QR plates installed and scan-tested (7.5) | Facility unit and supervisors | 12 Nov |  |
+| Training and dry run (7.6) | Facility unit and supervisors | 13 Nov |  |
+| Runbook and support plan (8.2) | Facility unit and lecturer | 17 Nov |  |
+| Pilot data and evaluation report (8.1, 1.2) | Lecturer | 1 Dec |  |
 
 **Control scope.** Look for sources of change before they arrive. Likely sources: the lecturer wants a new view, the facility unit wants a new category, cleaners ask for chat, someone asks for a second building. Each goes through 2.13. Example: if requirements grow from 21 to 24, scope variance = (24 − 21) ÷ 21 × 100% = 14.3% (amber).
 
@@ -1076,7 +1122,7 @@ Planned value PV comes from the time-phased baseline in 2.6.8. Earned value EV i
 
 **Control costs.** Compare AC with EV. Release contingency only through a logged decision. Check each invoice against its quote. Report monthly after go-live.
 
-**Control resources.** Track hours against the estimates and re-level when a role goes over capacity.
+**Control resources.** Every Friday each team member logs hours against 2.8.3. Re-level when anyone is above capacity for more than two days or is unavailable (what-if table in 2.8.4).
 
 **Control risks.** Update the register every Friday. Close risks that cannot happen any more. Add new risks as they appear.
 
@@ -1097,7 +1143,7 @@ Planned value PV comes from the time-phased baseline in 2.6.8. Earned value EV i
 
 ### 4.5 Project evaluation (how well did we manage the project)
 
-At the end compare plan and actual: duration (37.98 planned working days), effort (71.91 work-days), cost (baseline Rp 29,016,994), scope (21 requirements), number of change requests, risks that happened, and decisions that were late. Record the lessons in the closing report.
+At the end compare plan and actual: duration (37.00 planned working days), effort (76.36 work-days), cost (baseline Rp 40,768,992), scope (21 requirements), number of change requests, risks that happened, and decisions that were late. Record the lessons in the closing report.
 
 ## 5. CLOSING (Penutupan)
 
@@ -1105,16 +1151,16 @@ Closing finalizes all activities and transfers the completed or cancelled work t
 
 | Step | Output | Owner | Due |
 |---|---|---|---|
-| Final acceptance of all deliverables | Signed table in 4.3 | Lecturer | 2 Dec |
-| Transfer ownership of the domain, registrar account, Vercel, Supabase, Meta business account, SIM and GitHub organization to the institution | Accounts with two institutional admins. 2-factor login set. Passwords and keys rotated | Farid and facility unit | 18 Nov |
-| Hand over the system and QR register | Admin access, runbook, how to add rooms and cleaners, how to print and replace plates, register export | Farid | 18 Nov |
-| Confirm the support rota and the budget line for year 1 | Signed rota and approved budget (D14, D16) | Facility unit and faculty | 2 Dec |
-| Close procurement | Final invoices matched to quotes. Unneeded services cancelled. Renewal dates on calendar | Farid | 2 Dec |
-| Release resources | Thank testers and cleaners. Release the facility unit contact | Farid | 2 Dec |
-| Archive | Plan, logs, change log, risk register, quotes, evaluation report kept in the repository | Farid | 2 Dec |
-| Final cost reconciliation | Planned versus actual by line, and variance explanation | Farid | 2 Dec |
-| Retrospective | Two questions: what went well that we should continue, and what could we do differently | Team | 2 Dec |
-| Lessons learned and closing report | Planned vs actual (4.5) and pilot result (4.4) | Farid | 2 Dec |
+| Final acceptance of all deliverables | Signed table in 4.3 | Lecturer | 1 Dec |
+| Transfer ownership of the domain, registrar account, Vercel, Supabase, Meta business account, SIM and GitHub organization to the institution | Accounts with two institutional admins. 2-factor login set. Passwords and keys rotated | Farid and facility unit | 17 Nov |
+| Hand over the system and QR register | Admin access, runbook, how to add rooms and cleaners, how to print and replace plates, register export | Abdillah (system) and Rasyid (QR register) | 17 Nov |
+| Confirm the support rota and the budget line for year 1 | Signed rota and approved budget (D14, D16) | Facility unit and faculty | 1 Dec |
+| Close procurement | Final invoices matched to quotes. Unneeded services cancelled. Renewal dates on calendar | Farid | 1 Dec |
+| Release resources | Thank testers and cleaners. Release the team members and the facility unit contact | Farid | 1 Dec |
+| Archive | Plan, logs, change log, risk register, quotes, evaluation report kept in the repository | Farid | 1 Dec |
+| Final cost reconciliation | Planned versus actual by line, and variance explanation | Farid | 1 Dec |
+| Retrospective | Two questions: what went well that we should continue, and what could we do differently | All four team members | 1 Dec |
+| Lessons learned and closing report | Planned vs actual (4.5) and pilot result (4.4) | Farid | 1 Dec |
 | Next step decision | Expand, extend, or stop (rule in 4.4) | Lecturer, facility unit and faculty | After the report |
 
 **Lessons learned template**
@@ -1180,7 +1226,7 @@ Prices change. Re-quote before buying. Where sources disagree the conservative (
 | Email sending | Rp 0 | [Resend free plan](https://resend.com/pricing): 3,000 emails per month, 100 per day, 3 domains. Pro US$20 per month |
 | QR plates | Rp 50,000 each (budgetary) | Marketplace listings: [vinyl print Rp 99,000 per square meter](https://www.tokopedia.com/beedecal/cetak-stiker-vinyl-print), [acrylic QR signs Rp 10,000 to 50,000](https://www.tokopedia.com/find/qris-akrilik-a5), acrylic sign 15 x 20 cm with vinyl Rp 30,000 to 40,000. No 2026 quote for 15 x 20 cm UV-printed plates was found. Get 3 quotes |
 | SIM card and top-up | Rp 50,000 plus Rp 30,000 per month | Estimate |
-| Labor rates (placeholders) | Farid Rp 400,000, builder Rp 600,000 (not cash), facility staff Rp 200,000, cleaners Rp 180,000, supervisors Rp 300,000, university legal Rp 500,000 per day | Assumptions. Replace with the institution's rates |
+| Labor rates (placeholders) | Team members (Farid, Rasyha, Abdillah, Rasyid) Rp 400,000 each, facility staff Rp 200,000, cleaners Rp 180,000, supervisors Rp 300,000, university legal Rp 500,000 per day | Assumptions. Replace with the institution's rates |
 | Legal and security review | Rp 3,000,000 and Rp 5,000,000 | ROM placeholders. Replace with quotes or university time |
 | Messages per report | 2.45 | Assumption: 2 cleaners notified, 15% escalated, 30% of reporters get an update |
 | Reports per month | 600 lean, 900 recommended, 1,500 high | Assumption. High equals 50 reports a day |

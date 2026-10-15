@@ -1,13 +1,17 @@
 # Go Clean It: Project Management Plan
 
 Structured on the PMBOK process groups and knowledge areas used in the Manajemen Proyek course (EBI 4E3).
-Owner and project manager: Farid · Version 2.0, live deployment baseline · Prepared 15 October 2026 · Replaces version 1.0 of 12 October 2026
+Owner and project manager: Farid · Version 2.1, live deployment baseline with diagrams and charts (same numbers as 2.0) · Prepared 15 October 2026 · Replaces version 1.0 of 12 October 2026
 
 Related files: [PROJECT-PLAN.md](PROJECT-PLAN.md) (weekly tracker and health check) · [BLUEPRINT.md](BLUEPRINT.md) (technical spec) · [DESIGN-UPDATE.md](DESIGN-UPDATE.md) · [index.html](../index.html) (clickable prototype)
 
 **What changed from version 1.0.** Version 1.0 planned a prototype test: free services, no labor cost, and QR stickers as one printing task. Version 2.0 plans the live system. It adds the .com domain, a production database with backups, WhatsApp onboarding, a privacy notice, a security review, physical QR plates for every room and floor, and a plan for who runs and pays for the system afterwards. The budget now includes labor, running costs and a 12-month cost of ownership, with real prices checked on 15 October 2026 (Appendix C).
 
 Unit used for effort: **work-days** (one person working one day). Money is in rupiah. Dollar prices are converted at **Rp 17,900 per US$** (Bank Indonesia JISDOR on 6 Oct 2026 was Rp 17,917). The baseline starts Monday 12 Oct 2026. Indonesian public holidays are not modelled.
+
+**How the plan is organized.** Your steps map to the PMBOK process groups: mapping plan = Planning, execute plan = Executing, evaluation plan = Monitoring and Controlling.
+
+![How this plan follows the five process groups|w=640](lifecycle.png)
 
 ## Audit of version 1.0 (against the class materials and live-deployment needs)
 
@@ -87,6 +91,10 @@ Version 1.0 was checked against the slides in your Drive (Week 1 to 3, 5, 6, 7 a
 | Resources | Fixed | One builder, one project manager, facility staff as agreed. Over-allocation is resolved by leveling, not overtime |
 | Risk | Accepted within appetite | Risks with score 12 or more need a named owner and a response |
 
+**Milestones at a glance.**
+
+![Milestones on the way to the pilot|w=640](milestones.png)
+
 ### 1.2 Stakeholder register
 
 | Stakeholder | Interest in project | Power | Interest | Engagement strategy |
@@ -95,13 +103,15 @@ Version 1.0 was checked against the slides in your Drive (Week 1 to 3, 5, 6, 7 a
 | Lecturer (sponsor) | Idea proven and defensible | High | High | Manage closely. Demo in week 2, evaluation report on 2 Dec |
 | Facility unit | Faster, visible cleaning | High | High | Manage closely. Owns decisions D1, D4, D6, D9, D10 and the plate installation |
 | Faculty (budget holder) | Year-1 running cost | High | Medium | Keep satisfied. One-page cost summary before the pilot |
-| University finance and procurement | Payment method for dollar services, vendor rules | Medium | Low | Keep informed. Needed for decision D15 |
+| University finance and procurement | Payment method for dollar services, vendor rules | Medium | Low | Monitor. Inform early about the payment request (D15) |
 | University IT and legal | Data protection, retention, security review | High | Low | Keep satisfied. Send data classification and privacy notice draft |
 | Supervisors | Escalations and dashboard | Medium | High | Keep informed. Involve in the dry run |
 | Cleaners | Easy tasks, no blame | Low | High | Keep informed. Test with 2 to 3 real cleaners before launch |
 | Reporters (students, lecturers, staff) | Report in seconds | Low | Medium | Keep informed through the plate text and the status page |
 | Friends (early testers) | Help a friend | Low | Medium | Monitor. One test round, one thank-you |
 | Suppliers: registrar, Vercel, Supabase, Meta WhatsApp, plate printer | Paid services | Medium | Low | Monitor limits and price changes (section 2.11) |
+
+![Stakeholder map: power and interest|w=580](stakeholder-grid.png)
 
 ## 2. PLANNING (Perencanaan): the mapping plan
 
@@ -117,6 +127,8 @@ Version 1.0 was checked against the slides in your Drive (Week 1 to 3, 5, 6, 7 a
 | Schedule | Baseline in 2.5. Committed finish Wed 2 Dec 2026 |
 | Budget | Cost baseline in 2.6 |
 | Subsidiary plans | 2.1 scope, 2.5 schedule, 2.6 cost, 2.7 quality, 2.8 resource, 2.9 communication, 2.10 risk, 2.11 procurement, 2.12 stakeholder, 2.13 change, 2.14 QR deployment |
+
+![How the project is organized|w=640](orgchart.png)
 
 ### 2.1 Scope management plan
 
@@ -161,6 +173,8 @@ Check in both directions: every requirement has a work package, and every packag
 
 **Scope in context: from the first state to the next state.** Scope answers WHAT is needed, HOW it is done through processes and organization, and WHAT the business gets in the end.
 
+![Scope in context: first state to next state|w=640](scope-context.png)
+
 | Element | Go Clean It |
 |---|---|
 | First state (current situation) | Cleaning problems are reported by phone, chat or word of mouth. Nobody owns a request, cleaners guess the room, nobody measures response time, and there is no record or proof of work |
@@ -177,6 +191,8 @@ Check in both directions: every requirement has a work package, and every packag
 
 **Product scope:** a secured web system (guest report page, cleaner queue, supervisor dashboard, admin) on its own .com domain, with WhatsApp notification and daily backups, running in one pilot building with QR plates on every room and floor.
 
+![How a report travels|w=640](report-flow.png)
+
 **Deliverables:** secured database with tests · reporter, cleaner, supervisor and admin screens · notification and escalation service · production environment with backups and monitoring · domain and DNS · QR plates (room, toilet, floor, lobby), register and scan-test record · privacy notice and retention job · security review report · training notes and guide cards · runbook and support plan · pilot data · evaluation report · project documents (this plan, weekly logs, change log, closing report).
 
 **Acceptance criteria:** see 2.2 and the accepter column in 4.3.
@@ -187,7 +203,7 @@ Check in both directions: every requirement has a work package, and every packag
 
 Levels follow the class scheme: 0 Project, 1 Category, 2 Sub-category, 3 Work package. Effort is in work-days (it can be larger than the duration of an activity when several people work in parallel). Package 2.0 (clickable prototype) is finished before the baseline date and is a sunk cost. It is not counted in the budget.
 
-![WBS diagram](wbs2.png)
+![WBS in the class style: level bands 0 to 3|w=920](wbs-bands.png)
 
 Text version of the same WBS:
 
@@ -216,7 +232,7 @@ Text version of the same WBS:
 ├─ 5.0   Applications                                                8.84
 │  ├─ 5.1   Reporter flow (guest)                                    3.17
 │  ├─ 5.2   Cleaner flow                                             2.67
-│  └─ 5.3   Supervisor and admin, with QR sheet generator and plate check page   3.00
+│  └─ 5.3   Supervisor, admin, QR sheet and plate check              3.00
 ├─ 6.0   Production and notifications                                6.50
 │  ├─ 6.1   Production environment and backups                       1.67
 │  ├─ 6.2   WhatsApp verification and templates                      1.00
@@ -341,6 +357,8 @@ Role codes: PM Farid, DEV builder (Claude Code), FAC facility unit staff, CLN cl
 - **Domain before plates.** A printed QR cannot be changed, so plate production (S) waits for the domain (H) and for the production database (O) that creates the tokens.
 - **Long poles outside our control:** E (people's calendars), P (Meta review), S (printer lead time), G and F (facility unit time).
 
+![How likely is each finish date|w=860](schedule-prob.png)
+
 ![Baseline schedule](gantt2.png)
 
 **Schedule compression.** Crashing adds effort to shorten an activity on the critical path. Slope = (crash effort cost − normal effort cost) ÷ (normal time − crash time). Pick the cheapest slope first, only on the critical path, and recompute after each cut. Costs use the placeholder labor rates in 2.6 and are planning assumptions.
@@ -377,6 +395,8 @@ Two paths are critical, so cutting only the build path (K or L) or only the What
 | plus P, K and L together | 32.83 | Rp 3,000,000 |
 
 **Fast tracking** (parallel work, no extra effort, more risk). Starting the scaffold (I) right after the charter instead of after the friends test saves nothing alone, because the WhatsApp path is also critical. Starting WhatsApp verification (P) right after the charter, before the decision meeting, also saves nothing alone. Doing **both** saves **4.58 days** (finish about 32.33 days). Risk: if the lecturer or facility unit chooses a different provider or building, the verification work is lost and the scaffold may need rework. Recommended: start the Meta business verification paperwork now (cost: Farid's time only), and keep the scaffold after the friends test.
+
+![Time-cost trade-off: crashing and fast tracking|w=860](crash-graph.png)
 
 The committed baseline stays at Wed 2 Dec until the board approves the change as CR-06 (section 2.13).
 
@@ -433,6 +453,8 @@ The committed baseline stays at Wed 2 Dec until the board approves the change as
 
 Total cash: low Rp 9,514,744, **base Rp 14,237,993**, high Rp 23,893,341. Cloud services are counted for 2 months (the pilot month plus one month of preparation). Items marked ROM are placeholders. If the university legal office and IT do the reviews in kind, cash falls by about Rp 8,000,000.
 
+![Cash estimates with their accuracy range|w=860](cash-ranges.png)
+
 #### 2.6.5 Labor (in-kind) at placeholder rates
 
 Rates are placeholders to be replaced with the institution's rates. Labor is shown because most of a project's cost is often labor (Week 5).
@@ -461,6 +483,8 @@ Rates are placeholders to be replaced with the institution's rates. Labor is sho
 | **Authorized budget** | **Rp 32,708,693** | Cap for the project phase |
 | Builder (Claude Code), not in the baseline | Rp 14,958,000 equivalent | Cash Rp 0 under the existing plan. Shown so the real effort is visible |
 | Authorized budget if a paid developer did the build | Rp 47,666,693 | For comparison |
+
+![From cash to authorized budget|w=860](budget-waterfall.png)
 
 #### 2.6.7 Reserve analysis
 
@@ -504,6 +528,8 @@ The project budget ends after the pilot. A live system keeps costing money every
 | Lean (direct Meta API, no data allowance) | 600 | 1,470 | Rp 447,500 | Rp 358,000 | Rp 59,375 | Rp 524,275 | Rp 0 | Rp 0 | Rp 1,389,150 | Rp 16,669,800 |
 | Recommended (direct Meta API, data allowance) | 900 | 2,205 | Rp 447,500 | Rp 358,000 | Rp 59,375 | Rp 786,413 | Rp 0 | Rp 450,000 | Rp 2,101,288 | Rp 25,215,456 |
 | High volume (provider fee, 50 reports a day) | 1,500 | 3,675 | Rp 447,500 | Rp 358,000 | Rp 59,375 | Rp 1,310,689 | Rp 750,000 | Rp 450,000 | Rp 3,375,564 | Rp 40,506,768 |
+
+![Running cost per month after the pilot|w=860](run-cost.png)
 
 Support and maintenance by people (not cash unless paid): 2 maintainer days and 1 builder day each month, about Rp 1,400,000 per month or Rp 16,800,000 per year at the placeholder rates.
 
@@ -738,6 +764,8 @@ Process (Week 3 mapping): plan risk management, identify risks, qualitative anal
 | L9 | Payment method for dollar services is not available (international card) | 3 | 3 | 9 | Mitigate | Institutional virtual card (decision D15). Prepay one quarter | Card declined | Faculty finance |
 | O1 | Opportunity: facility unit adopts the QR flow earlier than planned | 2 | 4 | 8 | Enhance | Give them the sticker sheets and a short guide early | Facility unit asks for plates | Farid |
 
+![Risk matrix: probability and impact|w=820](risk-matrix.png)
+
 7 threats score 12 or more, so the risk indicator in 4.1 starts at red. Review the register every Friday. The cost effect of the main risks is in the EMV table (2.6.7).
 
 **Decisions with dates (these are risk responses).** The default applies if nobody answers by the date.
@@ -803,6 +831,8 @@ See 1.2. Targets: lecturer and facility unit from supportive to leading by the p
 | 5 | Farid | Updates the affected baseline and the blueprint if the data model or security rules change |
 | 6 | Farid | Tells the requester and everyone affected |
 
+![Change control: how a change gets approved|w=600](change-control.png)
+
 **48-hour policy (Week 3):** for time-sensitive changes the project manager may decide and then has 48 hours to get board approval or reverse the decision. Delegate small changes to the lowest level but tell everyone.
 
 | ID | Date | Change | Requested by | Impact | Decision |
@@ -847,6 +877,8 @@ This plan covers a QR code for every room, every toilet and every floor, mounted
 | **Total** | 34 | 6 | 40 | 6 | 8 | 1 | 55 |
 
 The floor split is an assumption. The site survey (package 3.5) replaces it with the real list.
+
+![QR plates in the pilot building|w=640](building-plates.png)
 
 #### 2.14.3 Plate options and recommendation
 
@@ -997,6 +1029,8 @@ Planned value PV comes from the time-phased baseline in 2.6.8. Earned value EV i
 - Progress is 76% (above 50%), so ETC = (Rp 29,016,994 − Rp 22,000,000) ÷ 0.92 = **Rp 7,627,167**. EAC = AC + ETC = Rp 24,000,000 + Rp 7,627,167 = **Rp 31,627,167**. VAC = Rp 29,016,994 − Rp 31,627,167 = **−Rp 2,610,173**. TCPI = 1.40.
 - Time: ATE = 25 working days, OD = 37.98. TE = 25 + (37.98 − 25 × 0.93) ÷ 0.93 = **40.84 working days**, about 2.86 days late.
 - Reading: the project is about 7% behind and 8% over budget. The forecast overrun of Rp 2,610,173 is larger than the contingency of Rp 2,135,699. The board would choose between crashing (2.5), cutting a requirement, or accepting a later finish.
+
+![Earned value at the end of week 5|w=640](evm-example.png)
 
 **Weekly tracking table (fill every Friday):**
 

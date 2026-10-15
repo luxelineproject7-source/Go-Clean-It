@@ -94,6 +94,22 @@ Check (both directions): every requirement has at least one work package, and ev
 
 ### 2.3 Scope statement
 
+**Scope in context: from the first state to the next state.** Scope answers WHAT is needed, HOW it is done through processes and organization, and WHAT the business gets in the end. This follows the class illustration of scope and structure.
+
+| Element | Go Clean It |
+|---|---|
+| First state (current situation) | Cleaning problems are reported by phone, chat or word of mouth. Nobody owns a request, cleaners guess the room, nobody measures response time, and there is no record or proof of work |
+| Business goals and priorities (input) | Median time from report to accept under 15 minutes. At least 80% of reports accepted. Visible response times for the faculty. Proof of work |
+| Constraints (input) | Slow campus Wi-Fi and basic Android phones. UI in Bahasa Indonesia. Personal data law (UU PDP). Free-tier hosting. One builder. Security before screens |
+| Processes and organization (input) | Facility unit, supervisors, on-shift cleaners and reporters. QR scan, dispatch to on-shift cleaners, accept, work, photo proof, rating, escalation after 10 minutes |
+| Next state (goals for change) | Every report reaches an on-shift cleaner within minutes, has one owner and a status, is backed by a photo, and is measured |
+| Prioritized improvements | 1) Report by QR with no login (REQ-01, 02, 15). 2) One owner per report: atomic accept and proof photo (REQ-04, 05). 3) Notification and escalation (REQ-07, 08). 4) Visibility: supervisor dashboard (REQ-09). 5) Control: admin, QR stickers, security (REQ-10, 11, 12) |
+| Potential business scope and impact | One building, about 40 rooms, up to 50 reports a day, about 20 users. Impact is measured against the Week 0 baseline |
+
+| WHAT (what is needed) | HOW (processes and organization) | WHAT (what the business gets) |
+|---|---|---|
+| Anyone can report a dirty room, and it gets fixed fast | QR scan → dispatch to on-shift cleaners → accept → work → photo proof → rating. Escalation to the supervisor after 10 minutes. Roles: reporter, cleaner, supervisor, admin | Faster response, one owner per request, evidence of work, and numbers for the faculty |
+
 **Product scope:** a mobile web app (guest report page, cleaner queue, supervisor dashboard, admin) with a secured database and WhatsApp notification, running in one pilot building.
 
 **Deliverables:** secured database with tests · reporter, cleaner, supervisor and admin screens · notification and escalation service · QR sticker sheets (room and floor) · deployed system · training notes · pilot data · evaluation report · project documents (this plan, weekly logs, change log, closing report).
@@ -107,6 +123,10 @@ Check (both directions): every requirement has at least one work package, and ev
 ### 2.4 Work breakdown structure (WBS)
 
 Levels follow the class scheme: 0 Project, 1 Category, 2 Sub-category, 3 Work package. Effort is in work-days and equals the expected duration `te` of the matching activity in 2.5. Package 2.0 (clickable prototype) is finished before the baseline date and is shown for completeness. It is not counted in the budget.
+
+![WBS diagram](wbs-diagram.png)
+
+Text version of the same WBS:
 
 ```
 0   Go Clean It pilot                                     50.08
@@ -151,6 +171,8 @@ Levels follow the class scheme: 0 Project, 1 Category, 2 Sub-category, 3 Work pa
 | 5.0 | 3.17 + 2.67 + 3.00 | 8.84 | 8.84 | OK |
 | 7.0 | 2.08 + 1.17 | 3.25 | 3.25 | OK |
 | Project | 3.08 + 14.25 + 6.83 + 8.84 + 3.83 + 3.25 + 10.00 | 50.08 | 50.08 | OK |
+
+**Note on deliverable orientation.** The class slides ask for a WBS built around deliverables, not around activities or departments. Most level 1 categories here are deliverables (core system, applications, notifications, release). Two are phases or activities (3.0 Pilot readiness and 8.0 Pilot operation). They are kept because the facility unit and the lecturer manage them as separate stages. If the lecturer requires a pure deliverable view, 3.0 would split into "test report", "decision list", "pilot data sheet" and "baseline dataset", and 8.0 into "pilot dataset" and "evaluation report".
 
 **WBS dictionary (three examples; the rest follow the same form):**
 

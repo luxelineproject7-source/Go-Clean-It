@@ -217,25 +217,37 @@ function flush(){
     .then(function(){syncState='ok';}).catch(function(){syncState='fail';}).then(function(){inflight--;});
 }
 function hash(s){var h=5381;for(var i=0;i<s.length;i++){h=((h<<5)+h+s.charCodeAt(i))|0;}return h;}
+/* Background redraws must not move the page: remember every scroll position, redraw, put them back. */
+function renderKeep(){
+  var sc=document.getElementById('screen'),pn=document.getElementById('panel'),a=sc?sc.scrollTop:0,b=pn?pn.scrollTop:0,w=window.pageYOffset||0;
+  render();
+  sc=document.getElementById('screen');pn=document.getElementById('panel');
+  if(sc&&a)sc.scrollTop=a;if(pn&&b)pn.scrollTop=b;if(w)window.scrollTo(0,w);
+}
+/* Do not redraw while the person is scrolling or tapping; the poll tries again 3 seconds later. */
+var lastTouch=0,QUIET_MS=4000;
+['pointerdown','touchstart','touchmove','keydown','wheel'].forEach(function(n){document.addEventListener(n,function(){lastTouch=Date.now();},{passive:true,capture:true});});
+document.addEventListener('scroll',function(){lastTouch=Date.now();},{passive:true,capture:true});
 function poll(){
   if(!shared||inflight||Object.keys(dirty).length||document.hidden)return;
   var v=localVer;
   sb('items?select=kind,id,data').then(function(rows){
     if(v!==localVer||inflight||Object.keys(dirty).length)return;
-    syncState='ok';
+    var wasFail=syncState==='fail';syncState='ok';
     var rs=[],ls=[],uo=null;
     rows.forEach(function(x){if(x.kind==='report')rs.push(x.data);else if(x.kind==='log')ls.push(x.data);else if(x.kind==='user')uo=x.data;});
     if(!seeded&&!rs.some(function(r){return r.id==='seed-a';})){seeded=true;var keep=rs;seed();reports=reports.concat(keep);pushAll();render();return;}
     seeded=true;
     var sig=hash(JSON.stringify(rows))+':'+rows.length;
-    if(sig===lastSig){return;}
+    if(sig===lastSig){if(wasFail&&!ui.splash)renderKeep();return;} /* connection came back: refresh the status banner once */
     var ae=document.activeElement;if(ae&&/^(TEXTAREA|INPUT|SELECT)$/.test(ae.tagName)&&ae.id!=='rolesel')return; /* do not interrupt typing */
+    if(Date.now()-lastTouch<QUIET_MS)return; /* busy scrolling or tapping: leave lastSig alone so the next poll retries */
     lastSig=sig;
     reports=rs.sort(function(a,b){return a.created-b.created;});
     logs=ls.sort(function(a,b){return b.at-a.at;}).slice(0,12);
     if(uo)Object.keys(uo).forEach(function(k){if(USERS[k])USERS[k].active=uo[k];});
-    if(!ui.splash&&!ui.busy&&!ui.loading)render();
-  }).catch(function(){syncState='fail';render();});
+    if(!ui.splash&&!ui.busy&&!ui.loading)renderKeep();
+  }).catch(function(){var was=syncState;syncState='fail';if(was!=='fail'&&!ui.splash)renderKeep();}); /* only redraw when the state really changes, not on every failed request */
 }
 function resetShared(){
   inflight++;seeded=true;
